@@ -16,6 +16,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"],
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off"
