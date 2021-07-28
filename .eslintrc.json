@@ -5,6 +5,7 @@
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:import/react",
         "airbnb"
     ],
     "parserOptions": {
@@ -18,7 +19,16 @@
         "react"
     ],
     "rules": {
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-filename-extension": [0],
+      "import/extensions": "off"
     },
-    "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"]
+    "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js",".jsx"]
+        }
+      }
+  }
 }

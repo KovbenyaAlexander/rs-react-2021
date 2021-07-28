@@ -1,5 +1,5 @@
 import React from 'react';
-import Test from './Components/Test.jsx';
+import Test from './Components/Test.js';
 
 const App = () => (
   <div>
