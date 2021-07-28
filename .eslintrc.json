@@ -1,24 +1,24 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "jest": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"],
-  "plugins": ["react"],
-  "rules": {
-    "react/react-in-jsx-scope": "off"
-  }
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off"
+    },
+    "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"]
 }
