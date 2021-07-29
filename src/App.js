@@ -1,10 +1,11 @@
 import React from 'react';
-import Test from './Components/Test.js';
+import SearchBar from './Components/SearchBar/SearchBar';
+import CardsList from './Components/CardsList/CardsList';
 
 const App = () => (
   <div>
-    App!
-    <Test />
+    <SearchBar />
+    <CardsList />
   </div>
 );
 
