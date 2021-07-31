@@ -1,10 +1,9 @@
 import React from 'react';
-import Test from './Components/Test.js';
+import Form from './Components/Form.js/Form';
 
 const App = () => (
   <div>
-    App!
-    <Test />
+    <Form />
   </div>
 );
 

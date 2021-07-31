@@ -1,0 +1,25 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 500px;
+}
+
+input{
+  width: 300px;
+}
+
+input:invalid, select:invalid {
+  border-color: red;
+}
+
+input:valid, select:valid {
+  border-color: green;
+}
+
+
+label{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
