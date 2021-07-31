@@ -1,9 +1,10 @@
 import React from 'react';
+import css from './SearchBar.module.css';
 
 const SearchBar = () => (
-  <div>
-    <input type="text" placeholder="Search" />
-  </div>
+  <header className={css.header}>
+    <input className={css.input} type="text" placeholder="Search" />
+  </header>
 );
 
 export default SearchBar;
