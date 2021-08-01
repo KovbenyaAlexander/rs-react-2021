@@ -15,9 +15,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [{ from: './public' }],
-    }),
+    //   new CopyPlugin({
+    //     patterns: [{ from: './public' }],
+    //   }),
   ],
   module: {
     rules: [
@@ -35,7 +35,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react', '@babel/preset-env'],
+            presets: ['@babel/preset-react', '@babel/preset-env', 'minify'],
           },
         },
       },
