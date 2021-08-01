@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './Form.module.css';
 
-const Form = ({ addCard }) => {
+const Form = ({ addCard, setShowMessage }) => {
   const initialState = {
     name: '',
     email: '',
@@ -42,6 +42,7 @@ const Form = ({ addCard }) => {
     e.preventDefault();
     addCard(state);
     setState(initialState);
+    setShowMessage(true);
   };
 
   return (
@@ -138,4 +139,5 @@ export default Form;
 
 Form.propTypes = {
   addCard: PropTypes.func.isRequired,
+  setShowMessage: PropTypes.func.isRequired,
 };
