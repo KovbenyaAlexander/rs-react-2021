@@ -1,12 +1,15 @@
 .form{
   display: flex;
   flex-direction: column;
-  width: 500px;
-  margin: 10px;
+  width: 300px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 5px;
+  transition: 0.3s;
 }
 
-input{
-  width: 300px;
+.form:hover {
+  box-shadow: 0 15px 25px 0 rgba(0,0,0,0.2);
 }
 
 input:invalid, select:invalid {
@@ -15,6 +18,11 @@ input:invalid, select:invalid {
 
 input:valid, select:valid {
   border-color: green;
+}
+
+.agreement{
+  display: flex;
+  justify-content: space-between;
 }
 
 

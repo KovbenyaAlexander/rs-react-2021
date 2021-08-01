@@ -26,6 +26,7 @@ const Form = ({ addCard }) => {
           isAgree: e.target.checked,
         };
       });
+      return;
     }
 
     if (typeOfInput === 'single' || typeOfInput === 'married') {
@@ -36,6 +37,7 @@ const Form = ({ addCard }) => {
           family: typeOfInput,
         };
       });
+      return;
     }
 
     setState((prevState) => {
@@ -54,104 +56,100 @@ const Form = ({ addCard }) => {
   };
 
   return (
-    <form className={css.form} onSubmit={onSubmitHandler}>
-      <label htmlFor="name">
-        Name
-        <input
-          value={state.name}
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-          type="text"
-          id="name"
-          name="name"
-          required
-        />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          id="email"
-          value={state.email}
-          name="email"
-          required
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-        />
-      </label>
-      <label htmlFor="date">
-        Date of birth
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={state.date}
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-          required
-        />
-      </label>
+    <>
+      <form className={css.form} onSubmit={onSubmitHandler}>
+        <label htmlFor="name">
+          Name
+          <input
+            value={state.name}
+            onChange={(e) => onChangeHandler(e)}
+            type="text"
+            id="name"
+            name="name"
+            required
+          />
+        </label>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            value={state.email}
+            name="email"
+            required
+            onChange={(e) => onChangeHandler(e)}
+          />
+        </label>
+        <label htmlFor="date">
+          Date of birth
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={state.date}
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+            required
+          />
+        </label>
 
-      <label htmlFor="sex" required>
-        Sex
-        <select
-          id="sex"
-          name="sex"
-          value={state.sex}
-          required
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-        >
-          <option value=""> </option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </label>
+        <label htmlFor="sex" required>
+          Sex
+          <select
+            id="sex"
+            name="sex"
+            value={state.sex}
+            required
+            onChange={(e) => onChangeHandler(e)}
+          >
+            <option value=""> </option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
 
-      <br />
+        <br />
 
-      <span>Family status</span>
-      <label htmlFor="single">
-        single
-        <input
-          type="radio"
-          id="single"
-          name="familyStatus"
-          required
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-        />
-      </label>
-      <label htmlFor="married">
-        married
-        <input
-          type="radio"
-          id="married"
-          name="familyStatus"
-          onChange={(e) => {
-            onChangeHandler(e);
-          }}
-        />
-      </label>
-      <br />
-      <label htmlFor="agreement">
-        <input
-          id="agreement"
-          name="agreement"
-          type="checkbox"
-          checked={state.isAgree}
-          onChange={(e) => onChangeHandler(e)}
-          required
-        />
-        I agree to the Terms of Service
-      </label>
-      <input type="submit" />
-    </form>
+        <span>Family status</span>
+        <label htmlFor="single">
+          single
+          <input
+            type="radio"
+            id="single"
+            name="familyStatus"
+            required
+            onChange={(e) => onChangeHandler(e)}
+          />
+        </label>
+        <label htmlFor="married">
+          married
+          <input
+            type="radio"
+            id="married"
+            name="familyStatus"
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+          />
+        </label>
+        <br />
+        <div className={css.agreement}>
+          <span>I agree to the Terms of Service</span>
+          <label htmlFor="agreement">
+            <input
+              id="agreement"
+              name="agreement"
+              type="checkbox"
+              checked={state.isAgree}
+              onChange={(e) => onChangeHandler(e)}
+              required
+            />
+          </label>
+        </div>
+        <input type="submit" value="Send" />
+      </form>
+    </>
   );
 };
 

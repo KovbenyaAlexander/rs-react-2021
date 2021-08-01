@@ -1,14 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import css from './Card.module.css';
 
 const Card = ({ card }) => (
-  <div>
-    <p>{card.name}</p>
-    <p>{card.date}</p>
-    <p>{card.sex}</p>
-    <p>{card.family}</p>
-    <p>{card.email}</p>
-    <hr />
+  <div className={css.cardContainer}>
+    <p>
+      <b>Name:</b>
+      {' '}
+      {card.name}
+    </p>
+
+    <p>
+      <b>Email:</b>
+      {' '}
+      {card.email}
+    </p>
+
+    <p>
+      <b>Date of birth:</b>
+      {' '}
+      {card.date}
+    </p>
+
+    <p>
+      <b>Sex:</b>
+      {' '}
+      {card.sex}
+    </p>
+
+    <p>
+      <b>Family status:</b>
+      {' '}
+      {card.family}
+    </p>
   </div>
 );
 
