@@ -9,11 +9,14 @@ const Form = ({ addCard, setShowMessage }) => {
     date: '',
     sex: '',
     family: '',
+    isSingleChecked: false,
+    isMarriedChecked: false,
+    isAgree: false,
   };
 
   const [state, setState] = useState(initialState);
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e, familyStatusSwitcher) => {
     const typeOfInput = e.target.name;
     const newValue = e.target.value;
 
@@ -24,8 +27,23 @@ const Form = ({ addCard, setShowMessage }) => {
         return {
           ...PrevState,
           family: value,
+          isSingleChecked: false,
+          isMarriedChecked: false,
+          [familyStatusSwitcher]: true,
         };
       });
+      return;
+    }
+
+    if (typeOfInput === 'agreement') {
+      setState((prevState) => {
+        const PrevState = prevState;
+        return {
+          ...PrevState,
+          isAgree: !PrevState.isAgree,
+        };
+      });
+
       return;
     }
 
@@ -79,7 +97,6 @@ const Form = ({ addCard, setShowMessage }) => {
           required
         />
       </label>
-
       <label htmlFor="sex" required>
         Sex
         <select
@@ -93,9 +110,7 @@ const Form = ({ addCard, setShowMessage }) => {
           <option value="Female">Female</option>
         </select>
       </label>
-
       <br />
-
       <span>Family status</span>
       <label htmlFor="single">
         single
@@ -104,7 +119,8 @@ const Form = ({ addCard, setShowMessage }) => {
           name="familyStatus"
           id="single"
           required
-          onChange={(e) => onChangeHandler(e)}
+          checked={state.isSingleChecked}
+          onChange={(e) => onChangeHandler(e, 'isSingleChecked')}
         />
       </label>
       <label htmlFor="married">
@@ -114,8 +130,9 @@ const Form = ({ addCard, setShowMessage }) => {
           name="familyStatus"
           id="married"
           onChange={(e) => {
-            onChangeHandler(e);
+            onChangeHandler(e, 'isMarriedChecked');
           }}
+          checked={state.isMarriedChecked}
         />
       </label>
       <br />
@@ -125,6 +142,7 @@ const Form = ({ addCard, setShowMessage }) => {
           <input
             name="agreement"
             type="checkbox"
+            checked={state.isAgree}
             onChange={(e) => onChangeHandler(e)}
             required
           />
