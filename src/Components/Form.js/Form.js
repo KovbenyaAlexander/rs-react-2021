@@ -54,38 +54,25 @@ const Form = ({ addCard, setShowMessage }) => {
 
     if (typeOfInput === 'familyStatus') {
       const value = e.target.id;
-      setState((prevState) => {
-        const PrevState = prevState;
-        return {
-          ...PrevState,
-          family: value,
-          isSingleChecked: false,
-          isMarriedChecked: false,
-          [familyStatusSwitcher]: true,
-        };
-      });
+      setState((prevState) => ({
+        ...prevState,
+        family: value,
+        isSingleChecked: false,
+        isMarriedChecked: false,
+        [familyStatusSwitcher]: true,
+      }));
       return;
     }
 
     if (typeOfInput === 'agreement') {
-      setState((prevState) => {
-        const PrevState = prevState;
-        return {
-          ...PrevState,
-          isAgree: !PrevState.isAgree,
-        };
-      });
-
+      setState((prevState) => ({ ...prevState, isAgree: !prevState.isAgree }));
       return;
     }
 
-    setState((prevState) => {
-      const PrevState = prevState;
-      return {
-        ...PrevState,
-        [typeOfInput]: newValue,
-      };
-    });
+    setState((prevState) => ({
+      ...prevState,
+      [typeOfInput]: newValue,
+    }));
   };
 
   const onSubmitHandler = (e) => {
