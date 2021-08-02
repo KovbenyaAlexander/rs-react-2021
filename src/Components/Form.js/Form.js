@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './Form.module.css';
+import emailValivation from '../Services/FormServices';
 
 const Form = ({ addCard, setShowMessage }) => {
   const initialState = {
@@ -15,6 +16,37 @@ const Form = ({ addCard, setShowMessage }) => {
   };
 
   const [state, setState] = useState(initialState);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    setErrors({});
+
+    if (state.name.length < 4) {
+      setErrors((prevState) => ({ ...prevState, name: true }));
+    }
+    if (!emailValivation(state.email)) {
+      setErrors((prevState) => ({ ...prevState, email: true }));
+    }
+    if (!state.date) {
+      setErrors((prevState) => ({ ...prevState, date: true }));
+    }
+    if (!state.sex) {
+      setErrors((prevState) => ({ ...prevState, sex: true }));
+    }
+    if (!state.isAgree) {
+      setErrors((prevState) => ({ ...prevState, agree: true }));
+    }
+    if (!state.family) {
+      setErrors((prevState) => ({ ...prevState, family: true }));
+    }
+  }, [
+    state.isAgree,
+    state.email,
+    state.sex,
+    state.family,
+    state.date,
+    state.name,
+  ]);
 
   const onChangeHandler = (e, familyStatusSwitcher) => {
     const typeOfInput = e.target.name;
@@ -58,15 +90,20 @@ const Form = ({ addCard, setShowMessage }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    addCard(state);
-    setState(initialState);
-    setShowMessage(true);
+    if (!Object.keys(errors).length) {
+      addCard(state);
+      setState(initialState);
+      setShowMessage(true);
+    }
   };
 
   return (
     <form className={css.form} onSubmit={onSubmitHandler}>
       <label htmlFor="name">
         Name
+        {errors.name ? (
+          <span className={css.validationError}>*Required</span>
+        ) : null}
         <input
           value={state.name}
           onChange={(e) => onChangeHandler(e)}
@@ -77,6 +114,9 @@ const Form = ({ addCard, setShowMessage }) => {
       </label>
       <label htmlFor="email">
         Email
+        {errors.email ? (
+          <span className={css.validationError}>*Required correct email</span>
+        ) : null}
         <input
           type="email"
           value={state.email}
@@ -87,6 +127,9 @@ const Form = ({ addCard, setShowMessage }) => {
       </label>
       <label htmlFor="date">
         Date of birth
+        {errors.date ? (
+          <span className={css.validationError}>*Required</span>
+        ) : null}
         <input
           type="date"
           name="date"
@@ -99,6 +142,9 @@ const Form = ({ addCard, setShowMessage }) => {
       </label>
       <label htmlFor="sex" required>
         Sex
+        {errors.sex ? (
+          <span className={css.validationError}>*Required</span>
+        ) : null}
         <select
           name="sex"
           value={state.sex}
@@ -111,7 +157,12 @@ const Form = ({ addCard, setShowMessage }) => {
         </select>
       </label>
       <br />
-      <span>Family status</span>
+      <div className={css.familyStatusWrapper}>
+        <span>Family status</span>
+        {errors.family ? (
+          <span className={css.validationError}>*Required</span>
+        ) : null}
+      </div>
       <label htmlFor="single">
         single
         <input
@@ -138,6 +189,9 @@ const Form = ({ addCard, setShowMessage }) => {
       <br />
       <div className={css.agreement}>
         <span>I agree to the Terms of Service</span>
+        {errors.agree ? (
+          <span className={css.validationError}>*Required</span>
+        ) : null}
         <label htmlFor="agreement">
           <input
             name="agreement"
