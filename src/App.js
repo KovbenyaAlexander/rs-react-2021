@@ -4,6 +4,7 @@ import ImagesContainer from './Components/ImagesContainer/ImagesContainer';
 import Pagination from './Components/Pagination/Pagination';
 import Form from './Components/Form/Form';
 import ImagesPerPageChanger from './Components/ImagesPerPageChanger/ImagesPerPageChanger';
+import Sort from './Components/Sort/Sort';
 
 const App = () => {
   const [imagesPerPage, setImagesPerPage] = useState(20);
@@ -14,7 +15,7 @@ const App = () => {
   const firstImageIndexInPage = lastImageIndexInPage - imagesPerPage;
   const imagesInCurrentPage = data?.slice(
     firstImageIndexInPage,
-    lastImageIndexInPage,
+    lastImageIndexInPage
   );
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => setSearchText(text);
@@ -34,6 +35,7 @@ const App = () => {
           onChangeImgPerPageHandler={onChangeImgPerPageHandler}
           onChangePageHandler={onChangePageHandler}
         />
+        <Sort />
         <Pagination
           imagesPerPage={imagesPerPage}
           totalImages={data.length}

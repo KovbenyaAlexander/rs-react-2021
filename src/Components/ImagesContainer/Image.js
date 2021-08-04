@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import css from './Image.module.css';
 
 const Image = ({ data }) => {
   const src = `https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}.jpg`;
   return (
     <div>
-      <img key={data.id} src={src} alt="imgFromApi" />
+      <img className={css.img} key={data.id} src={src} alt="imgFromApi" />
     </div>
   );
 };
@@ -13,11 +14,9 @@ const Image = ({ data }) => {
 export default Image;
 
 Image.propTypes = {
-  data: PropTypes.shape(
-    {
-      server: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      secret: PropTypes.string.isRequired,
-    },
-  ).isRequired,
+  data: PropTypes.shape({
+    server: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    secret: PropTypes.string.isRequired,
+  }).isRequired,
 };
