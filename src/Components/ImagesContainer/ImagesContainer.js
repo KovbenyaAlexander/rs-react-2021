@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from './ImagesContainer.module.css';
+import Image from './Image';
 
 const ImagesContainer = ({ data }) => {
-  const arrOfImages = data.map((item) => {
-    const src = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
-    return <img key={item.id} className={css.img} src={src} alt="imgFromApi" />;
-  });
+  const arrOfImages = data.map((item) => <Image key={item.id} data={item} />);
 
   return <div className={css.imagesContainer}>{arrOfImages}</div>;
 };
@@ -14,11 +12,5 @@ const ImagesContainer = ({ data }) => {
 export default ImagesContainer;
 
 ImagesContainer.propTypes = {
-  data: PropTypes.shape([
-    {
-      server: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      secret: PropTypes.string.isRequired,
-    },
-  ]).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
