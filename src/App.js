@@ -9,8 +9,9 @@ import Sort from './Components/Sort/Sort';
 const App = () => {
   const [imagesPerPage, setImagesPerPage] = useState(20);
   const [currentPage, setCurrentpage] = useState(1);
-  const [searchText, setSearchText] = useState('cars');
-  const { data, loading, error } = useFetch(searchText);
+  const [searchText, setSearchText] = useState('car');
+  const [sort, setSort] = useState('relevance');
+  const { data, loading, error } = useFetch(searchText, sort);
   const lastImageIndexInPage = currentPage * imagesPerPage;
   const firstImageIndexInPage = lastImageIndexInPage - imagesPerPage;
   const imagesInCurrentPage = data?.slice(
@@ -19,12 +20,21 @@ const App = () => {
   );
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => setSearchText(text);
-  const onChangeImgPerPageHandler = (number) => {
-    setImagesPerPage(number);
-  };
+  const onChangeImgPerPageHandler = (number) => setImagesPerPage(number);
+  const setSortHandler = (sortType) => setSort(sortType);
 
   if (loading) {
-    return <p className="App">Loading...</p>;
+    return (
+      <div className="App">
+        <Form onSearchHandler={onSearchHandler} />
+        <ImagesPerPageChanger
+          onChangeImgPerPageHandler={onChangeImgPerPageHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
+        <Sort setSortHandler={setSortHandler} />
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   if (data) {
@@ -35,7 +45,7 @@ const App = () => {
           onChangeImgPerPageHandler={onChangeImgPerPageHandler}
           onChangePageHandler={onChangePageHandler}
         />
-        <Sort />
+        <Sort setSortHandler={setSortHandler} />
         <Pagination
           imagesPerPage={imagesPerPage}
           totalImages={data.length}

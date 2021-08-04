@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Form = ({ onSearchHandler }) => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('car');
 
   const onChangeHandler = (e) => {
     const newValue = e.target.value;

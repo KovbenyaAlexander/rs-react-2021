@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react/cjs/react.development';
 import css from './Sort.module.css';
 
-const Sort = () => {
+const Sort = ({ setSortHandler }) => {
   const initialState = {
     'date-posted-asc': false,
     'date-posted-desc': false,
@@ -25,11 +25,16 @@ const Sort = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(checkedField);
+    Object.keys(checkedField).forEach((sortValue) => {
+      if (checkedField[sortValue]) {
+        setSortHandler(sortValue);
+      }
+    });
   };
 
   return (
     <form onSubmit={onSubmitHandler} className={css.form}>
+      Sort by:
       <label className={css.label} htmlFor="relevance">
         <input
           type="radio"
@@ -84,7 +89,6 @@ const Sort = () => {
         />
         interestingness-asc
       </label>
-
       <button type="submit">Change</button>
     </form>
   );

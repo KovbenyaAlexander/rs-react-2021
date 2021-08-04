@@ -5,7 +5,7 @@ const ImagesPerPageChanger = ({
   onChangeImgPerPageHandler,
   onChangePageHandler,
 }) => {
-  const [inputValue, setInputvalue] = useState('');
+  const [inputValue, setInputvalue] = useState('20');
   const [error, setError] = useState(true);
 
   useEffect(() => {

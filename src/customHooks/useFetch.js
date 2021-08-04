@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 
-function useFetch(searchText) {
-  const URL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=63a3861adc71749f46aca4a5b7047f94&tags=${searchText}&text=${searchText}&format=json&nojsoncallback=1&sort=interestingness-desc&`;
+function useFetch(searchText, sort) {
+  console.log(`---->`);
+
+  console.log(sort);
+
+  const URL = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=63a3861adc71749f46aca4a5b7047f94&tags=${searchText}&text=${searchText}&format=json&nojsoncallback=1&sort=${sort}&`;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,7 +25,7 @@ function useFetch(searchText) {
         setLoading(false);
         setError(e);
       });
-  }, [searchText]);
+  }, [searchText, sort]);
 
   return { data, loading, error };
 }
