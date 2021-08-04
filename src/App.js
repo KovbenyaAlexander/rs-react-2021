@@ -3,6 +3,7 @@ import useFetch from './customHooks/useFetch';
 import ImagesContainer from './Components/ImagesContainer/ImagesContainer';
 import Pagination from './Components/Pagination/Pagination';
 import Form from './Components/Form/Form';
+import ImagesPerPageChanger from './Components/ImagesPerPageChanger/ImagesPerPageChanger';
 
 const App = () => {
   const [imagesPerPage, setImagesPerPage] = useState(20);
@@ -17,6 +18,9 @@ const App = () => {
   );
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => setSearchText(text);
+  const onChangeImgPerPageHandler = (number) => {
+    setImagesPerPage(number);
+  };
 
   if (loading) {
     return <p className="App">Loading...</p>;
@@ -26,6 +30,10 @@ const App = () => {
     return (
       <div className="App">
         <Form onSearchHandler={onSearchHandler} />
+        <ImagesPerPageChanger
+          onChangeImgPerPageHandler={onChangeImgPerPageHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
         <Pagination
           imagesPerPage={imagesPerPage}
           totalImages={data.length}
