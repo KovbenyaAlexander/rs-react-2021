@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import css from './Form.module.css';
 
 const Form = ({ onSearchHandler }) => {
   const [searchText, setSearchText] = useState('car');
@@ -16,12 +17,17 @@ const Form = ({ onSearchHandler }) => {
 
   return (
     <form onSubmit={(e) => onSubmitHandler(e)}>
+      <span className={css.descriptionOfInput}>Serach images:</span>
       <input
         type="text"
+        className={css.input}
         value={searchText}
+        placeholder="Search text"
         onChange={(e) => onChangeHandler(e)}
       />
-      <button type="submit">Search</button>
+      <button className={css.submit} type="submit">
+        Search
+      </button>
     </form>
   );
 };

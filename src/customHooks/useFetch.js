@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 function useFetch(searchText, sort) {
-  console.log(`---->`);
+  console.log('---->');
 
   console.log(sort);
 

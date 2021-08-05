@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import css from './imgPerPage.module.css';
 
 const ImagesPerPageChanger = ({
   onChangeImgPerPageHandler,
@@ -33,13 +34,17 @@ const ImagesPerPageChanger = ({
 
   return (
     <form onSubmit={(e) => onSubmitHandler(e)}>
+      <span className={css.descriptionOfInput}>Images per page:</span>
       {error ? 'error' : null}
       <input
+        className={css.input}
         type="text"
         value={inputValue}
         onChange={(e) => onChangeHandler(e)}
       />
-      <button type="submit">Change</button>
+      <button className={css.submit} type="submit">
+        Change
+      </button>
     </form>
   );
 };

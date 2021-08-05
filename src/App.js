@@ -16,7 +16,7 @@ const App = () => {
   const firstImageIndexInPage = lastImageIndexInPage - imagesPerPage;
   const imagesInCurrentPage = data?.slice(
     firstImageIndexInPage,
-    lastImageIndexInPage
+    lastImageIndexInPage,
   );
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => setSearchText(text);

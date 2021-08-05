@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import css from './Pagination.module.css';
 
 const Pagination = ({ imagesPerPage, totalImages, onChangePageHandler }) => {
   const valuesOfButtons = [];
@@ -10,15 +11,19 @@ const Pagination = ({ imagesPerPage, totalImages, onChangePageHandler }) => {
   }
 
   const arrayOfButtons = valuesOfButtons.map((number) => (
-    <li key={number}>
-      <button type="button" onClick={() => onChangePageHandler(number)}>
+    <li className={css.listItem} key={number}>
+      <button
+        type="button"
+        className={css.paginationElem}
+        onClick={() => onChangePageHandler(number)}
+      >
         {number}
       </button>
     </li>
   ));
   return (
     <div>
-      <ul>{arrayOfButtons}</ul>
+      <ul className={css.paginationList}>{arrayOfButtons}</ul>
     </div>
   );
 };
