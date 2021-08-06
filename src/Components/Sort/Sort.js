@@ -4,11 +4,10 @@ import css from './Sort.module.css';
 
 const Sort = ({ setSortHandler }) => {
   const initialState = {
-    'date-posted-asc': false,
-    'date-posted-desc': false,
-    'interestingness-desc': false,
-    'interestingness-asc': false,
-    relevance: true,
+    'name:asc': true,
+    'name:desc': false,
+    'race:asc': false,
+    'race:desc': false,
   };
 
   const [checkedField, setCheckedField] = useState(initialState);
@@ -17,8 +16,10 @@ const Sort = ({ setSortHandler }) => {
     const currentActiveRadioButton = e.target.id;
 
     setCheckedField(() => ({
-      ...initialState,
-      relevance: false,
+      'name:asc': false,
+      'name:desc': false,
+      'race:asc': false,
+      'race:desc': false,
       [currentActiveRadioButton]: true,
     }));
   };
@@ -36,59 +37,49 @@ const Sort = ({ setSortHandler }) => {
     <form onSubmit={onSubmitHandler} className={css.formContainer}>
       <div className={css.listContainer}>
         Sort by:
-        <label className={css.label} htmlFor="relevance">
+        <label className={css.label} htmlFor="name:asc">
           <input
             type="radio"
             name="sort"
-            id="relevance"
+            id="name:asc"
             required
-            checked={checkedField.relevance}
+            checked={checkedField['name:asc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          relevance
+          name:asc
         </label>
-        <label className={css.label} htmlFor="date-posted-asc">
+        <label className={css.label} htmlFor="name:desc">
           <input
             type="radio"
             name="sort"
-            id="date-posted-asc"
+            id="name:desc"
             required
-            checked={checkedField['date-posted-asc']}
+            checked={checkedField['name:desc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          date-posted-asc
+          name:desc
         </label>
-        <label className={css.label} htmlFor="date-posted-desc">
+        <label className={css.label} htmlFor="race:asc">
           <input
             type="radio"
             name="sort"
-            id="date-posted-desc"
-            onChange={(e) => onChangeHandler(e)}
-            checked={checkedField['date-posted-desc']}
-          />
-          date-posted-desc
-        </label>
-        <label className={css.label} htmlFor="interestingness-desc">
-          <input
-            type="radio"
-            name="sort"
-            id="interestingness-desc"
+            id="race:asc"
             required
-            checked={checkedField['interestingness-desc']}
+            checked={checkedField['race:asc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          interestingness-desc
+          race:asc
         </label>
-        <label className={css.label} htmlFor="interestingness-asc">
+        <label className={css.label} htmlFor="race:desc">
           <input
             type="radio"
             name="sort"
-            id="interestingness-asc"
+            id="race:desc"
             required
-            checked={checkedField['interestingness-asc']}
+            checked={checkedField['race:desc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          interestingness-asc
+          race:desc
         </label>
       </div>
       <button className={css.submit} type="submit">

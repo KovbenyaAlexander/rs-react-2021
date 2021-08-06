@@ -57,7 +57,7 @@ const App = () => {
           setCurrentpage={setCurrentpage}
           currentPage={currentPage}
         />
-        <ImagesContainer data={data.photo} />
+        <ImagesContainer data={data.docs} />
       </div>
     );
   }

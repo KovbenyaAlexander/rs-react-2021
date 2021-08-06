@@ -4,7 +4,8 @@ import css from './ImagesContainer.module.css';
 import Image from './Image';
 
 const ImagesContainer = ({ data }) => {
-  const arrOfImages = data.map((item) => <Image key={item.id} data={item} />);
+  // eslint-disable-next-line no-underscore-dangle
+  const arrOfImages = data.map((item) => <Image key={item._id} data={item} />);
 
   return <div className={css.imagesContainer}>{arrOfImages}</div>;
 };
