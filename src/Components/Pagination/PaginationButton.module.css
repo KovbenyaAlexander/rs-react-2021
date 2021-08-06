@@ -1,0 +1,9 @@
+.btn {
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.active {
+  background-color: rgb(113, 177, 158);
+}

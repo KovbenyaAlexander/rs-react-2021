@@ -1,37 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from './Pagination.module.css';
+// import css from './Pagination.module.css';
+import PaginationButton from './PaginationButton';
+import getPageNumbers from './PaginationService';
 
-const Pagination = ({ imagesPerPage, totalImages, onChangePageHandler }) => {
-  const valuesOfButtons = [];
-  const numberOfPages = Math.ceil(totalImages / imagesPerPage);
+const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
+  const pageNumbers = getPageNumbers(totalPages, 10, currentPage);
 
-  for (let i = 1; i <= numberOfPages; i += 1) {
-    valuesOfButtons.push(i);
-  }
+  const buttons = [];
+  pageNumbers.forEach((number) => {
+    buttons.push(
+      <PaginationButton
+        key={number}
+        i={number}
+        setCurrentpage={setCurrentpage}
+        currentPage={currentPage}
+      />
+    );
+  });
 
-  const arrayOfButtons = valuesOfButtons.map((number) => (
-    <li className={css.listItem} key={number}>
-      <button
-        type="button"
-        className={css.paginationElem}
-        onClick={() => onChangePageHandler(number)}
-      >
-        {number}
-      </button>
-    </li>
-  ));
+  const paginationArrowHandler = (direction) => {
+    if (direction === 'decr' && currentPage > 1) {
+      setCurrentpage((prev) => prev - 1);
+      return;
+    }
+    if (direction === 'inc' && currentPage < totalPages - 1) {
+      setCurrentpage((prev) => prev + 1);
+    }
+  };
+
   return (
     <div>
-      <ul className={css.paginationList}>{arrayOfButtons}</ul>
+      <button onClick={() => paginationArrowHandler('decr')} type="button">
+        Left
+      </button>
+      {buttons}
+      <button onClick={() => paginationArrowHandler('inc')} type="button">
+        Right
+      </button>
     </div>
   );
 };
 
 Pagination.propTypes = {
-  imagesPerPage: PropTypes.number.isRequired,
-  totalImages: PropTypes.number.isRequired,
-  onChangePageHandler: PropTypes.func.isRequired,
+  setCurrentpage: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
 };
 
 export default Pagination;

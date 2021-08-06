@@ -14,14 +14,16 @@ const App = () => {
   const { data, loading, error } = useFetch(searchText, sort);
   const lastImageIndexInPage = currentPage * imagesPerPage;
   const firstImageIndexInPage = lastImageIndexInPage - imagesPerPage;
-  const imagesInCurrentPage = data?.slice(
-    firstImageIndexInPage,
-    lastImageIndexInPage,
-  );
+  // const imagesInCurrentPage = data?.slice(
+  //   firstImageIndexInPage,
+  //   lastImageIndexInPage
+  // );
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => setSearchText(text);
   const onChangeImgPerPageHandler = (number) => setImagesPerPage(number);
   const setSortHandler = (sortType) => setSort(sortType);
+
+  console.log(currentPage);
 
   if (loading) {
     return (
@@ -41,17 +43,17 @@ const App = () => {
     return (
       <div className="App">
         <Form onSearchHandler={onSearchHandler} />
-        <ImagesPerPageChanger
+        {/* <ImagesPerPageChanger
           onChangeImgPerPageHandler={onChangeImgPerPageHandler}
           onChangePageHandler={onChangePageHandler}
-        />
+        /> */}
         <Sort setSortHandler={setSortHandler} />
         <Pagination
-          imagesPerPage={imagesPerPage}
-          totalImages={data.length}
-          onChangePageHandler={onChangePageHandler}
+          totalPages={data.pages}
+          setCurrentpage={setCurrentpage}
+          currentPage={currentPage}
         />
-        <ImagesContainer data={imagesInCurrentPage} />
+        {/* <ImagesContainer data={imagesInCurrentPage} /> */}
       </div>
     );
   }
