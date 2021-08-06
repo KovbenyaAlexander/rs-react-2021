@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './Form.module.css';
 
-const Form = ({ onSearchHandler }) => {
-  const [searchText, setSearchText] = useState('car');
+const SearchForm = ({ onSearchHandler }) => {
+  const [searchText, setSearchText] = useState('');
 
   const onChangeHandler = (e) => {
     const newValue = e.target.value;
@@ -17,7 +17,7 @@ const Form = ({ onSearchHandler }) => {
 
   return (
     <form className={css.formContainer} onSubmit={(e) => onSubmitHandler(e)}>
-      <span className={css.descriptionOfInput}>Serach images:</span>
+      <span className={css.descriptionOfInput}>Serach characters:</span>
       <input
         type="text"
         className={css.input}
@@ -32,8 +32,8 @@ const Form = ({ onSearchHandler }) => {
   );
 };
 
-Form.propTypes = {
+SearchForm.propTypes = {
   onSearchHandler: PropTypes.func.isRequired,
 };
 
-export default Form;
+export default SearchForm;

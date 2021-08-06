@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from './Image.module.css';
+import css from './Card.module.css';
 
-const Image = ({ data }) => {
+const Card = ({ data }) => {
   console.log('');
 
   return (
@@ -27,9 +27,9 @@ const Image = ({ data }) => {
   );
 };
 
-export default Image;
+export default Card;
 
-Image.propTypes = {
+Card.propTypes = {
   data: PropTypes.shape({
     race: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

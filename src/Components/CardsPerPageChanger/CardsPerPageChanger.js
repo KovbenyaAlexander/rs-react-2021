@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import css from './imgPerPage.module.css';
+import css from './CardsPerPage.module.css';
 
 const ImagesPerPageChanger = ({
-  onChangeImgPerPageHandler,
+  onChangeCardPerPageHandler,
   onChangePageHandler,
 }) => {
   const [inputValue, setInputvalue] = useState('20');
@@ -27,7 +27,7 @@ const ImagesPerPageChanger = ({
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (!error) {
-      onChangeImgPerPageHandler(Number(inputValue));
+      onChangeCardPerPageHandler(Number(inputValue));
       onChangePageHandler(1);
     }
   };
@@ -50,7 +50,7 @@ const ImagesPerPageChanger = ({
 };
 
 ImagesPerPageChanger.propTypes = {
-  onChangeImgPerPageHandler: PropTypes.func.isRequired,
+  onChangeCardPerPageHandler: PropTypes.func.isRequired,
   onChangePageHandler: PropTypes.func.isRequired,
 };
 

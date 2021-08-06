@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 
-function useFetch(searchText, sort, currentPage, imagesPerPage) {
-  console.log(`currentPagr-->${currentPage}`);
-  console.log(`imagesPerPage-->${imagesPerPage}`);
-  // const URL = `https://the-one-api.dev/v2/character?limit=15page=2`;
-  const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${imagesPerPage}&sort=${sort}`;
+function useFetch(searchText, sort, currentPage, cardsPerPage) {
+  const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${sort}&name=/${searchText}/i`;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,9 +19,6 @@ function useFetch(searchText, sort, currentPage, imagesPerPage) {
     })
       .then((response) => response.json())
       .then((Data) => {
-        // console.log(`PAGES---->>>${Data.photos.pages}`);
-        console.log(Data);
-
         setData(Data);
         setLoading(false);
       })
@@ -32,7 +26,7 @@ function useFetch(searchText, sort, currentPage, imagesPerPage) {
         setLoading(false);
         setError(e);
       });
-  }, [searchText, sort, currentPage, imagesPerPage]);
+  }, [searchText, sort, currentPage, cardsPerPage]);
 
   return { data, loading, error };
 }

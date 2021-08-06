@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import useFetch from './customHooks/useFetch';
-import ImagesContainer from './Components/ImagesContainer/ImagesContainer';
+import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Pagination from './Components/Pagination/Pagination';
-import Form from './Components/Form/Form';
-import ImagesPerPageChanger from './Components/ImagesPerPageChanger/ImagesPerPageChanger';
+import SearchForm from './Components/SearchForm/SearchForm';
+import CardsPerPageChanger from './Components/CardsPerPageChanger/CardsPerPageChanger';
 import Sort from './Components/Sort/Sort';
 
 const App = () => {
-  const [imagesPerPage, setImagesPerPage] = useState(20);
+  const [cardsPerPage, setCardsPerPage] = useState(20);
   const [currentPage, setCurrentpage] = useState(1);
-  const [searchText, setSearchText] = useState('car');
+  const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('relevance');
   const { data, loading, error } = useFetch(
     searchText,
     sort,
     currentPage,
-    imagesPerPage
+    cardsPerPage,
   );
 
   const onChangePageHandler = (page) => setCurrentpage(page);
@@ -23,18 +23,18 @@ const App = () => {
     setSearchText(text);
     setCurrentpage(1);
   };
-  const onChangeImgPerPageHandler = (number) => setImagesPerPage(number);
+  const onChangeCardPerPageHandler = (number) => setCardsPerPage(number);
   const setSortHandler = (sortType) => setSort(sortType);
 
   if (loading) {
     return (
       <div className="App">
-        <Form
+        <SearchForm
           onSearchHandler={onSearchHandler}
           onChangePageHandler={onChangePageHandler}
         />
-        <ImagesPerPageChanger
-          onChangeImgPerPageHandler={onChangeImgPerPageHandler}
+        <CardsPerPageChanger
+          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
           onChangePageHandler={onChangePageHandler}
         />
         <Sort setSortHandler={setSortHandler} />
@@ -46,9 +46,12 @@ const App = () => {
   if (data) {
     return (
       <div className="App">
-        <Form onSearchHandler={onSearchHandler} />
-        <ImagesPerPageChanger
-          onChangeImgPerPageHandler={onChangeImgPerPageHandler}
+        <SearchForm
+          onSearchHandler={onSearchHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
+        <CardsPerPageChanger
+          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
           onChangePageHandler={onChangePageHandler}
         />
         <Sort setSortHandler={setSortHandler} />
@@ -57,7 +60,7 @@ const App = () => {
           setCurrentpage={setCurrentpage}
           currentPage={currentPage}
         />
-        <ImagesContainer data={data.docs} />
+        <CardsContainer data={data.docs} />
       </div>
     );
   }

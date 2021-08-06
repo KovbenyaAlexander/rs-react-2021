@@ -9,15 +9,18 @@ const PaginationButton = ({ i, setCurrentpage, currentPage }) => {
 
   const cssClassesOfButton = currentPage === i ? `${css.btn} ${css.active}` : `${css.btn}`;
 
-  return (
-    <button
-      type="button"
-      className={cssClassesOfButton}
-      onClick={() => onClickHandler(i)}
-    >
-      {i}
-    </button>
-  );
+  if (i > 0) {
+    return (
+      <button
+        type="button"
+        className={cssClassesOfButton}
+        onClick={() => onClickHandler(i)}
+      >
+        {i}
+      </button>
+    );
+  }
+  return null;
 };
 
 PaginationButton.propTypes = {
