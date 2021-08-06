@@ -11,24 +11,28 @@ const App = () => {
   const [currentPage, setCurrentpage] = useState(1);
   const [searchText, setSearchText] = useState('car');
   const [sort, setSort] = useState('relevance');
-  const { data, loading, error } = useFetch(searchText, sort);
-  const lastImageIndexInPage = currentPage * imagesPerPage;
-  const firstImageIndexInPage = lastImageIndexInPage - imagesPerPage;
-  // const imagesInCurrentPage = data?.slice(
-  //   firstImageIndexInPage,
-  //   lastImageIndexInPage
-  // );
+  const { data, loading, error } = useFetch(
+    searchText,
+    sort,
+    currentPage,
+    imagesPerPage
+  );
+
   const onChangePageHandler = (page) => setCurrentpage(page);
-  const onSearchHandler = (text) => setSearchText(text);
+  const onSearchHandler = (text) => {
+    setSearchText(text);
+    setCurrentpage(1);
+  };
   const onChangeImgPerPageHandler = (number) => setImagesPerPage(number);
   const setSortHandler = (sortType) => setSort(sortType);
-
-  console.log(currentPage);
 
   if (loading) {
     return (
       <div className="App">
-        <Form onSearchHandler={onSearchHandler} />
+        <Form
+          onSearchHandler={onSearchHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
         <ImagesPerPageChanger
           onChangeImgPerPageHandler={onChangeImgPerPageHandler}
           onChangePageHandler={onChangePageHandler}
@@ -43,17 +47,17 @@ const App = () => {
     return (
       <div className="App">
         <Form onSearchHandler={onSearchHandler} />
-        {/* <ImagesPerPageChanger
+        <ImagesPerPageChanger
           onChangeImgPerPageHandler={onChangeImgPerPageHandler}
           onChangePageHandler={onChangePageHandler}
-        /> */}
+        />
         <Sort setSortHandler={setSortHandler} />
         <Pagination
           totalPages={data.pages}
           setCurrentpage={setCurrentpage}
           currentPage={currentPage}
         />
-        {/* <ImagesContainer data={imagesInCurrentPage} /> */}
+        <ImagesContainer data={data.photo} />
       </div>
     );
   }

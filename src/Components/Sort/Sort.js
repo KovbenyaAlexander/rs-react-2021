@@ -33,7 +33,7 @@ const Sort = ({ setSortHandler }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className={css.form}>
+    <form onSubmit={onSubmitHandler} className={css.formContainer}>
       <div className={css.listContainer}>
         Sort by:
         <label className={css.label} htmlFor="relevance">

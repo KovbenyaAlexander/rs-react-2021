@@ -16,7 +16,7 @@ const Form = ({ onSearchHandler }) => {
   };
 
   return (
-    <form onSubmit={(e) => onSubmitHandler(e)}>
+    <form className={css.formContainer} onSubmit={(e) => onSubmitHandler(e)}>
       <span className={css.descriptionOfInput}>Serach images:</span>
       <input
         type="text"

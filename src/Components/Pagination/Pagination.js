@@ -15,28 +15,41 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
         i={number}
         setCurrentpage={setCurrentpage}
         currentPage={currentPage}
-      />
+      />,
     );
   });
 
-  const paginationArrowHandler = (direction) => {
-    if (direction === 'decr' && currentPage > 1) {
+  const changePageHandler = (change) => {
+    if (change === 'decr' && currentPage > 1) {
       setCurrentpage((prev) => prev - 1);
       return;
     }
-    if (direction === 'inc' && currentPage < totalPages - 1) {
+    if (change === 'inc' && currentPage < totalPages - 1) {
       setCurrentpage((prev) => prev + 1);
+    }
+
+    if (change === 'first') {
+      setCurrentpage(1);
+    }
+    if (change === 'last') {
+      setCurrentpage(totalPages);
     }
   };
 
   return (
     <div>
-      <button onClick={() => paginationArrowHandler('decr')} type="button">
+      <button onClick={() => changePageHandler('first')} type="button">
+        first
+      </button>
+      <button onClick={() => changePageHandler('decr')} type="button">
         Left
       </button>
       {buttons}
-      <button onClick={() => paginationArrowHandler('inc')} type="button">
+      <button onClick={() => changePageHandler('inc')} type="button">
         Right
+      </button>
+      <button onClick={() => changePageHandler('last')} type="button">
+        last
       </button>
     </div>
   );

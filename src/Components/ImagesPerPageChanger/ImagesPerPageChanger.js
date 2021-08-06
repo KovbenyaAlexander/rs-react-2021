@@ -12,7 +12,7 @@ const ImagesPerPageChanger = ({
   useEffect(() => {
     const value = Number(inputValue);
     setError({});
-    if (Number.isNaN(value) || !Number.isInteger(value)) {
+    if (Number.isNaN(value) || !Number.isInteger(value) || value > 500) {
       setError(true);
     } else {
       setError(false);
@@ -33,9 +33,9 @@ const ImagesPerPageChanger = ({
   };
 
   return (
-    <form onSubmit={(e) => onSubmitHandler(e)}>
+    <form className={css.formContainer} onSubmit={(e) => onSubmitHandler(e)}>
       <span className={css.descriptionOfInput}>Images per page:</span>
-      {error ? 'error' : null}
+      {error ? 'Error. Max value - 500. Min - 0.' : null}
       <input
         className={css.input}
         type="text"
