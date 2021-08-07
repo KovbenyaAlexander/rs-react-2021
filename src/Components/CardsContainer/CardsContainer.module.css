@@ -7,3 +7,20 @@
   margin: 15px auto 0px;
 }
 
+@media screen and (max-width: 1500px) {
+  .cardsContainer{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .cardsContainer{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cardsContainer{
+    grid-template-columns: 1fr;
+  }
+}

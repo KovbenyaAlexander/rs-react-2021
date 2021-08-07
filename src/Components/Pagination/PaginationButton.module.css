@@ -6,6 +6,7 @@
   background: #ddd;
   border-radius: 3px;
   transition: all 0.4s;
+  letter-spacing: 2px;
 }
 
 .active {
