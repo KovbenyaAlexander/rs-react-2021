@@ -21,7 +21,7 @@ function useFetch(searchText, sort, currentPage, cardsPerPage) {
         if (response.status === 429) {
           setError({
             isError: true,
-            msg: 'Too many requests. Try later. You have 100 requests every 10 minutes.',
+            msg: 'Too many requests. Try later.',
           });
         }
         return response.json();

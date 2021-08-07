@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import useFetch from './customHooks/useFetch';
 import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Pagination from './Components/Pagination/Pagination';
-import SearchForm from './Components/SearchForm/SearchForm';
-import CardsPerPageChanger from './Components/CardsPerPageChanger/CardsPerPageChanger';
 import Sort from './Components/Sort/Sort';
 import Loader from './Components/Loader/Loader';
+import Main from './Components/Main/Main';
 
 const App = () => {
   const [cardsPerPage, setCardsPerPage] = useState(20);
@@ -19,27 +18,18 @@ const App = () => {
     cardsPerPage
   );
 
-  const onChangePageHandler = (page) => setCurrentpage(page);
-  const onSearchHandler = (text) => {
-    setSearchText(text);
-    setCurrentpage(1);
-  };
   const onChangeCardPerPageHandler = (number) => setCardsPerPage(number);
   const setSortHandler = (sortType) => setSort(sortType);
 
   if (loading) {
     return (
       <div className="App">
-        <SearchForm
-          onSearchHandler={onSearchHandler}
-          onChangePageHandler={onChangePageHandler}
-        />
-        <CardsPerPageChanger
+        <Main
+          setCurrentpage={setCurrentpage}
+          setSearchText={setSearchText}
           onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          onChangePageHandler={onChangePageHandler}
+          setSortHandler={setSortHandler}
         />
-        <Sort setSortHandler={setSortHandler} />
-        {/* <p>Loading...</p> */}
         <Loader />
       </div>
     );
@@ -48,15 +38,12 @@ const App = () => {
   if (data) {
     return (
       <div className="App">
-        <SearchForm
-          onSearchHandler={onSearchHandler}
-          onChangePageHandler={onChangePageHandler}
-        />
-        <CardsPerPageChanger
+        <Main
+          setCurrentpage={setCurrentpage}
+          setSearchText={setSearchText}
           onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          onChangePageHandler={onChangePageHandler}
+          setSortHandler={setSortHandler}
         />
-        <Sort setSortHandler={setSortHandler} />
         <Pagination
           totalPages={data.pages}
           setCurrentpage={setCurrentpage}
@@ -70,15 +57,12 @@ const App = () => {
   if (error.isError || error.msg) {
     return (
       <div className="App">
-        <SearchForm
-          onSearchHandler={onSearchHandler}
-          onChangePageHandler={onChangePageHandler}
-        />
-        <CardsPerPageChanger
+        <Main
+          setCurrentpage={setCurrentpage}
+          setSearchText={setSearchText}
           onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          onChangePageHandler={onChangePageHandler}
+          setSortHandler={setSortHandler}
         />
-        <Sort setSortHandler={setSortHandler} />
         <p>{error.msg}</p>
       </div>
     );

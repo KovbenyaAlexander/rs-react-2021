@@ -1,7 +1,7 @@
 .formContainer {
   display: flex;
   justify-content: space-between;
-  width: 493px;
+  width: 400px;
   align-items: flex-end;
   border: 1px solid grey;
   padding: 10px;
