@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import css from './Pagination.module.css';
+import css from './Pagination.module.css';
 import PaginationButton from './PaginationButton';
 import getPageNumbers from './PaginationService';
 
@@ -37,19 +37,35 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
   };
 
   return (
-    <div>
-      <button onClick={() => changePageHandler('first')} type="button">
-        first
+    <div className={css.paginationContainer}>
+      <button
+        className={css.btn}
+        onClick={() => changePageHandler('first')}
+        type="button"
+      >
+        START
       </button>
-      <button onClick={() => changePageHandler('decr')} type="button">
-        Left
+      <button
+        className={css.btn}
+        onClick={() => changePageHandler('decr')}
+        type="button"
+      >
+        &#8592;
       </button>
       {buttons}
-      <button onClick={() => changePageHandler('inc')} type="button">
-        Right
+      <button
+        className={css.btn}
+        onClick={() => changePageHandler('inc')}
+        type="button"
+      >
+        &#8594;
       </button>
-      <button onClick={() => changePageHandler('last')} type="button">
-        last
+      <button
+        className={css.btn}
+        onClick={() => changePageHandler('last')}
+        type="button"
+      >
+        END
       </button>
     </div>
   );

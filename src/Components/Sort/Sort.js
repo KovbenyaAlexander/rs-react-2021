@@ -46,7 +46,7 @@ const Sort = ({ setSortHandler }) => {
             checked={checkedField['name:asc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          name:asc
+          <span className={css.sortDescription}>name аscending</span>
         </label>
         <label className={css.label} htmlFor="name:desc">
           <input
@@ -57,7 +57,7 @@ const Sort = ({ setSortHandler }) => {
             checked={checkedField['name:desc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          name:desc
+          <span className={css.sortDescription}>name descending</span>
         </label>
         <label className={css.label} htmlFor="race:asc">
           <input
@@ -68,7 +68,7 @@ const Sort = ({ setSortHandler }) => {
             checked={checkedField['race:asc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          race:asc
+          <span className={css.sortDescription}>race аscending</span>
         </label>
         <label className={css.label} htmlFor="race:desc">
           <input
@@ -79,7 +79,7 @@ const Sort = ({ setSortHandler }) => {
             checked={checkedField['race:desc']}
             onChange={(e) => onChangeHandler(e)}
           />
-          race:desc
+          <span className={css.sortDescription}>race descending</span>
         </label>
       </div>
       <button className={css.submit} type="submit">

@@ -5,17 +5,18 @@ import Pagination from './Components/Pagination/Pagination';
 import SearchForm from './Components/SearchForm/SearchForm';
 import CardsPerPageChanger from './Components/CardsPerPageChanger/CardsPerPageChanger';
 import Sort from './Components/Sort/Sort';
+import Loader from './Components/Loader/Loader';
 
 const App = () => {
   const [cardsPerPage, setCardsPerPage] = useState(20);
   const [currentPage, setCurrentpage] = useState(1);
   const [searchText, setSearchText] = useState('');
-  const [sort, setSort] = useState('relevance');
+  const [sort, setSort] = useState('');
   const { data, loading, error } = useFetch(
     searchText,
     sort,
     currentPage,
-    cardsPerPage,
+    cardsPerPage
   );
 
   const onChangePageHandler = (page) => setCurrentpage(page);
@@ -38,7 +39,8 @@ const App = () => {
           onChangePageHandler={onChangePageHandler}
         />
         <Sort setSortHandler={setSortHandler} />
-        <p>Loading...</p>
+        {/* <p>Loading...</p> */}
+        <Loader />
       </div>
     );
   }
