@@ -11,7 +11,7 @@ const App = () => {
   const [cardsPerPage, setCardsPerPage] = useState(20);
   const [currentPage, setCurrentpage] = useState(1);
   const [searchText, setSearchText] = useState('');
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState('name:asc');
   const { data, loading, error } = useFetch(
     searchText,
     sort,
@@ -67,8 +67,21 @@ const App = () => {
     );
   }
 
-  if (error) {
-    return <p> Something went wrong</p>;
+  if (error.isError || error.msg) {
+    return (
+      <div className="App">
+        <SearchForm
+          onSearchHandler={onSearchHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
+        <CardsPerPageChanger
+          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
+          onChangePageHandler={onChangePageHandler}
+        />
+        <Sort setSortHandler={setSortHandler} />
+        <p>{error.msg}</p>
+      </div>
+    );
   }
 
   return <p> Something went wrong</p>;

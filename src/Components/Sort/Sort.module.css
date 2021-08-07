@@ -1,16 +1,21 @@
 .formContainer {
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 493px;
   align-items: flex-end;
   border: 1px solid grey;
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
   margin: 5px;
 }
 
 .label {
   display: block;
+  cursor: pointer;
+}
+
+.input{
+  cursor: pointer;
 }
 
 .submit {
@@ -32,4 +37,9 @@
 
 .sortDescription{
   margin-left: 5px;
+  cursor: pointer;
+}
+
+.sortDescription:hover{
+  font-weight: bold;
 }

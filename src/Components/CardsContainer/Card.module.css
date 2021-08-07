@@ -1,5 +1,12 @@
 .cardContainer{
   padding: 10px;
+  border-radius: 15px;
+}
+
+.cardContainer:hover{
+  transition: all .2s;
+
+  background-color: rgba(128, 128, 128, 0.151);
 }
 
 .fieldOfCard{

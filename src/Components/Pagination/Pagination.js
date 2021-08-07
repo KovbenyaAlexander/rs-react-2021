@@ -5,7 +5,12 @@ import PaginationButton from './PaginationButton';
 import getPageNumbers from './PaginationService';
 
 const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
-  const pageNumbers = getPageNumbers(totalPages, 10, currentPage);
+  const numberButtonsOfPagination = 10;
+  const pageNumbers = getPageNumbers(
+    totalPages,
+    numberButtonsOfPagination,
+    currentPage,
+  );
 
   const buttons = [];
   pageNumbers.forEach((number) => {

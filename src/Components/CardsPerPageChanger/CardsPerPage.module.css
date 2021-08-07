@@ -25,8 +25,7 @@
 
 .input:hover {
   border: 1px solid black;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .submit:hover {
@@ -37,7 +36,7 @@
 
 .descriptionOfInput {
   display: inline-block;
-  font-size: 24px;
+  font-size: 15px;
   width: 250px;
 }
 

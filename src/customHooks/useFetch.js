@@ -17,14 +17,22 @@ function useFetch(searchText, sort, currentPage, cardsPerPage) {
         Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 429) {
+          setError({
+            isError: true,
+            msg: 'Too many requests. Try later. You have 100 requests every 10 minutes.',
+          });
+        }
+        return response.json();
+      })
       .then((Data) => {
         setData(Data);
         setLoading(false);
       })
-      .catch((e) => {
+      .catch(() => {
         setLoading(false);
-        setError(e);
+        setError((prev) => ({ ...prev, error: true }));
       });
   }, [searchText, sort, currentPage, cardsPerPage]);
 

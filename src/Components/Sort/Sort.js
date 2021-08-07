@@ -39,6 +39,7 @@ const Sort = ({ setSortHandler }) => {
         Sort by:
         <label className={css.label} htmlFor="name:asc">
           <input
+            className={css.input}
             type="radio"
             name="sort"
             id="name:asc"
@@ -50,6 +51,7 @@ const Sort = ({ setSortHandler }) => {
         </label>
         <label className={css.label} htmlFor="name:desc">
           <input
+            className={css.input}
             type="radio"
             name="sort"
             id="name:desc"
@@ -61,6 +63,7 @@ const Sort = ({ setSortHandler }) => {
         </label>
         <label className={css.label} htmlFor="race:asc">
           <input
+            className={css.input}
             type="radio"
             name="sort"
             id="race:asc"
@@ -72,6 +75,7 @@ const Sort = ({ setSortHandler }) => {
         </label>
         <label className={css.label} htmlFor="race:desc">
           <input
+            className={css.input}
             type="radio"
             name="sort"
             id="race:desc"
