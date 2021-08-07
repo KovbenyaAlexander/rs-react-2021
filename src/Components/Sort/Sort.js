@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './Sort.module.css';
 
-const Sort = ({ setSortHandler }) => {
+const Sort = ({ setSort }) => {
   const typeOfSortInit = {
     name: true,
     race: false,
@@ -25,8 +25,8 @@ const Sort = ({ setSortHandler }) => {
     const currentActiveRadioButton = e.target.id;
 
     if (
-      currentActiveRadioButton !== 'asc'
-      && currentActiveRadioButton !== 'desc'
+      currentActiveRadioButton !== 'asc' &&
+      currentActiveRadioButton !== 'desc'
     ) {
       setCheckedField(() => ({
         ...typeOfSortInit,
@@ -47,9 +47,9 @@ const Sort = ({ setSortHandler }) => {
     Object.keys(typeOfSort).forEach((sortValue) => {
       if (typeOfSort[sortValue]) {
         if (sortDirection.asc) {
-          setSortHandler(`${sortValue}:asc`);
+          setSort(`${sortValue}:asc`);
         } else {
-          setSortHandler(`${sortValue}:desc`);
+          setSort(`${sortValue}:desc`);
         }
       }
     });
@@ -179,7 +179,7 @@ const Sort = ({ setSortHandler }) => {
 };
 
 Sort.propTypes = {
-  setSortHandler: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
 };
 
 export default Sort;

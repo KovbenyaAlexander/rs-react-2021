@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './CardsPerPage.module.css';
 
-const ImagesPerPageChanger = ({
-  onChangeCardPerPageHandler,
-  onChangePageHandler,
-}) => {
+const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
   const [inputValue, setInputvalue] = useState('20');
   const [error, setError] = useState(true);
 
@@ -13,10 +10,10 @@ const ImagesPerPageChanger = ({
     const value = Number(inputValue);
     setError({});
     if (
-      Number.isNaN(value)
-      || !Number.isInteger(value)
-      || value > 500
-      || value < 1
+      Number.isNaN(value) ||
+      !Number.isInteger(value) ||
+      value > 500 ||
+      value < 1
     ) {
       setError(true);
     } else {
@@ -32,7 +29,7 @@ const ImagesPerPageChanger = ({
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (!error) {
-      onChangeCardPerPageHandler(Number(inputValue));
+      setCardsPerPage(Number(inputValue));
       onChangePageHandler(1);
     }
   };
@@ -59,7 +56,7 @@ const ImagesPerPageChanger = ({
 };
 
 ImagesPerPageChanger.propTypes = {
-  onChangeCardPerPageHandler: PropTypes.func.isRequired,
+  setCardsPerPage: PropTypes.func.isRequired,
   onChangePageHandler: PropTypes.func.isRequired,
 };
 

@@ -5,12 +5,7 @@ import CardsPerPageChanger from '../CardsPerPageChanger/CardsPerPageChanger';
 import Sort from '../Sort/Sort';
 import css from './Main.module.css';
 
-const Main = ({
-  setCurrentpage,
-  setSearchText,
-  onChangeCardPerPageHandler,
-  setSortHandler,
-}) => {
+const Main = ({ setCurrentpage, setSearchText, setCardsPerPage, setSort }) => {
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => {
     setSearchText(text);
@@ -26,12 +21,12 @@ const Main = ({
         />
 
         <CardsPerPageChanger
-          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
+          setCardsPerPage={setCardsPerPage}
           onChangePageHandler={onChangePageHandler}
         />
       </div>
 
-      <Sort setSortHandler={setSortHandler} />
+      <Sort setSort={setSort} />
     </main>
   );
 };
@@ -39,8 +34,8 @@ const Main = ({
 Main.propTypes = {
   setCurrentpage: PropTypes.func.isRequired,
   setSearchText: PropTypes.func.isRequired,
-  onChangeCardPerPageHandler: PropTypes.func.isRequired,
-  setSortHandler: PropTypes.func.isRequired,
+  setCardsPerPage: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
 };
 
 export default Main;

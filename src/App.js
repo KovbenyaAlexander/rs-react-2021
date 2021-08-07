@@ -14,11 +14,8 @@ const App = () => {
     searchText,
     sort,
     currentPage,
-    cardsPerPage,
+    cardsPerPage
   );
-
-  const onChangeCardPerPageHandler = (number) => setCardsPerPage(number);
-  const setSortHandler = (sortType) => setSort(sortType);
 
   if (loading) {
     return (
@@ -26,8 +23,8 @@ const App = () => {
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
-          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          setSortHandler={setSortHandler}
+          setCardsPerPage={setCardsPerPage}
+          setSort={setSort}
         />
         <Loader />
       </div>
@@ -40,8 +37,8 @@ const App = () => {
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
-          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          setSortHandler={setSortHandler}
+          setCardsPerPage={setCardsPerPage}
+          setSort={setSort}
         />
         <Pagination
           totalPages={data.pages}
@@ -59,8 +56,8 @@ const App = () => {
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
-          onChangeCardPerPageHandler={onChangeCardPerPageHandler}
-          setSortHandler={setSortHandler}
+          setCardsPerPage={setCardsPerPage}
+          setSort={setSort}
         />
         <p>{error.msg}</p>
       </div>
