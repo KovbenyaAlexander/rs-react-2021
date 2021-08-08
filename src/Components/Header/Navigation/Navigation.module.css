@@ -22,3 +22,7 @@
   color: black;
   text-decoration: underline;
 }
+
+.active {
+  text-decoration: underline !important;
+}

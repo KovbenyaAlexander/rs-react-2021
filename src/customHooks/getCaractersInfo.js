@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useFetch(id) {
-  console.log(id);
-
+function getCaractersInfo(id) {
   const URL = `https://the-one-api.dev/v2/character/${id}`;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,4 +39,4 @@ function useFetch(id) {
 
   return { data, loading, error };
 }
-export default useFetch;
+export default getCaractersInfo;
