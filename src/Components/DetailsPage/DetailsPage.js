@@ -62,6 +62,18 @@ const DetailsPage = ({ cardID }) => {
           <span className={css.fieldOfCard}>id:</span>
           {data._id ? ` ${data._id}` : ' not found'}
         </p>
+        {data.wikiUrl ? (
+          <a
+            href={data.wikiUrl}
+            className={css.link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            link to wiki
+          </a>
+        ) : (
+          'link to wiki not found'
+        )}
       </div>
     );
   }

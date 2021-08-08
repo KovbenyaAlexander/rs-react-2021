@@ -1,13 +1,16 @@
 .nav {
   width: 100%;
+  height: 80px;
 }
 
 .navList {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 30px;
   list-style: none;
-  font-size: 24px;
+  font-size: 30px;
+  padding-top: 15px;
 }
 
 .link {

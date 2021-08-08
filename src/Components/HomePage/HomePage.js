@@ -4,6 +4,7 @@ import CardsContainer from '../CardsContainer/CardsContainer';
 import Pagination from '../Pagination/Pagination';
 import Loader from '../Loader/Loader';
 import Main from '../Main/Main';
+import css from './HomePage.module.css';
 
 const App = () => {
   const [cardsPerPage, setCardsPerPage] = useState(20);
@@ -19,7 +20,7 @@ const App = () => {
 
   if (loading) {
     return (
-      <div className="Appq">
+      <>
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
@@ -27,13 +28,13 @@ const App = () => {
           setSort={setSort}
         />
         <Loader />
-      </div>
+      </>
     );
   }
 
   if (data) {
     return (
-      <div className="Appq">
+      <>
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
@@ -46,21 +47,21 @@ const App = () => {
           currentPage={currentPage}
         />
         <CardsContainer data={data.docs} />
-      </div>
+      </>
     );
   }
 
   if (error.isError || error.msg) {
     return (
-      <div className="Appq">
+      <>
         <Main
           setCurrentpage={setCurrentpage}
           setSearchText={setSearchText}
           setCardsPerPage={setCardsPerPage}
           setSort={setSort}
         />
-        <p>{error.msg}</p>
-      </div>
+        <p className={css.errorMsg}>{error.msg}</p>
+      </>
     );
   }
 

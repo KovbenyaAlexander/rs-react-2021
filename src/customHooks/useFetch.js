@@ -14,7 +14,7 @@ function useFetch(searchText, sort, currentPage, cardsPerPage) {
     fetch(URL, {
       method: 'GET',
       headers: {
-        Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
+        Authorization: 'Bearer db3XQf7N45ifx9Pj1BAA',
       },
     })
       .then((response) => {
