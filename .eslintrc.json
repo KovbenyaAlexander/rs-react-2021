@@ -21,7 +21,8 @@
     "rules": {
       "react/react-in-jsx-scope": "off",
       "react/jsx-filename-extension": [0],
-      "import/extensions": "off"
+      "import/extensions": "off",
+      "no-underscore-dangle": "off"
     },
     "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"],
     "settings": {

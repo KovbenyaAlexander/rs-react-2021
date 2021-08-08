@@ -4,7 +4,6 @@ import css from './CardsContainer.module.css';
 import Card from './Card';
 
 const CardsContainer = ({ data }) => {
-  // eslint-disable-next-line no-underscore-dangle
   const arrOfImages = data.map((item) => <Card key={item._id} data={item} />);
 
   if (arrOfImages.length) {

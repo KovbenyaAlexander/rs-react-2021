@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import css from './Card.module.css';
 
 const Card = ({ data }) => (
@@ -50,6 +51,10 @@ const Card = ({ data }) => (
     ) : (
       'link not found'
     )}
+    <br />
+    <NavLink className={css.link} to={`/details/${data._id}`}>
+      About
+    </NavLink>
   </div>
 );
 
@@ -65,5 +70,6 @@ Card.propTypes = {
     hair: PropTypes.string,
     realm: PropTypes.string,
     wikiUrl: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
