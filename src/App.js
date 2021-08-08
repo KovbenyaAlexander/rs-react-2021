@@ -1,69 +1,19 @@
-import React, { useState } from 'react';
-import useFetch from './customHooks/useFetch';
-import CardsContainer from './Components/CardsContainer/CardsContainer';
-import Pagination from './Components/Pagination/Pagination';
-import Loader from './Components/Loader/Loader';
-import Main from './Components/Main/Main';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './Components/HomePage/HomePage';
+import AboutPage from './Components/AboutPage/AboutPage';
+import Navigation from './Components/Navigation/Navigation';
+import Page404 from './Components/Page404/Page404';
 
-const App = () => {
-  const [cardsPerPage, setCardsPerPage] = useState(20);
-  const [currentPage, setCurrentpage] = useState(1);
-  const [searchText, setSearchText] = useState('');
-  const [sort, setSort] = useState('name:asc');
-  const { data, loading, error } = useFetch(
-    searchText,
-    sort,
-    currentPage,
-    cardsPerPage,
-  );
+const App = () => (
+  <div className="App">
+    <Navigation />
+    <Switch>
+      <Route path="/" component={HomePage} exact />
+      <Route path="/about" component={AboutPage} exact />
+      <Route component={Page404} />
+    </Switch>
+  </div>
+);
 
-  if (loading) {
-    return (
-      <div className="App">
-        <Main
-          setCurrentpage={setCurrentpage}
-          setSearchText={setSearchText}
-          setCardsPerPage={setCardsPerPage}
-          setSort={setSort}
-        />
-        <Loader />
-      </div>
-    );
-  }
-
-  if (data) {
-    return (
-      <div className="App">
-        <Main
-          setCurrentpage={setCurrentpage}
-          setSearchText={setSearchText}
-          setCardsPerPage={setCardsPerPage}
-          setSort={setSort}
-        />
-        <Pagination
-          totalPages={data.pages}
-          setCurrentpage={setCurrentpage}
-          currentPage={currentPage}
-        />
-        <CardsContainer data={data.docs} />
-      </div>
-    );
-  }
-
-  if (error.isError || error.msg) {
-    return (
-      <div className="App">
-        <Main
-          setCurrentpage={setCurrentpage}
-          setSearchText={setSearchText}
-          setCardsPerPage={setCardsPerPage}
-          setSort={setSort}
-        />
-        <p>{error.msg}</p>
-      </div>
-    );
-  }
-
-  return <p> Something went wrong</p>;
-};
 export default App;

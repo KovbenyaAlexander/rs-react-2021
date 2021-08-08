@@ -1,0 +1,12 @@
+.aboutContainer {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.aboutText {
+  font-size: 30px;
+  text-align: justify;
+}
