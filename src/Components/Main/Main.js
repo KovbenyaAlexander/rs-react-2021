@@ -5,7 +5,9 @@ import CardsPerPageChanger from '../CardsPerPageChanger/CardsPerPageChanger';
 import Sort from '../Sort/Sort';
 import css from './Main.module.css';
 
-const Main = ({ setCurrentpage, setSearchText, setCardsPerPage, setSort }) => {
+const Main = ({
+  setCurrentpage, setSearchText, setCardsPerPage, setSort,
+}) => {
   const onChangePageHandler = (page) => setCurrentpage(page);
   const onSearchHandler = (text) => {
     setSearchText(text);

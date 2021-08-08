@@ -14,7 +14,7 @@ const App = () => {
     searchText,
     sort,
     currentPage,
-    cardsPerPage
+    cardsPerPage,
   );
 
   if (loading) {

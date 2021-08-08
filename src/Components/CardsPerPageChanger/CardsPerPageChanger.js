@@ -48,7 +48,7 @@ const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
       </button>
       {error ? (
         <p className={css.errorMessage}>
-          Number required. Max value - 500. Min - 1.
+          Number required. Max value is 500. Min is 1.
         </p>
       ) : null}
     </form>
