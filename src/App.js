@@ -8,9 +8,7 @@ const App = () => {
   const [isShowMessage, setShowMessage] = useState(false);
 
   const addCard = (newCard) => {
-    setCards([...cards,
-
-      newCard]);
+    setCards([...cards, newCard]);
   };
 
   const showMessage = () => {
