@@ -7,7 +7,10 @@ const CardsContainer = ({ data }) => {
   // eslint-disable-next-line no-underscore-dangle
   const arrOfImages = data.map((item) => <Card key={item._id} data={item} />);
 
-  return <div className={css.cardsContainer}>{arrOfImages}</div>;
+  if (arrOfImages.length) {
+    return <div className={css.cardsContainer}>{arrOfImages}</div>;
+  }
+  return <span className={css.notFoundMsg}>Results not found</span>;
 };
 
 export default CardsContainer;

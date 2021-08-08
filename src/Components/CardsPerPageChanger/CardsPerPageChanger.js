@@ -10,10 +10,10 @@ const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
     const value = Number(inputValue);
     setError({});
     if (
-      Number.isNaN(value) ||
-      !Number.isInteger(value) ||
-      value > 500 ||
-      value < 1
+      Number.isNaN(value)
+      || !Number.isInteger(value)
+      || value > 500
+      || value < 1
     ) {
       setError(true);
     } else {
