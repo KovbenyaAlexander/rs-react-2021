@@ -4,10 +4,10 @@ import css from './CardsContainer.module.css';
 import Card from './Card';
 
 const CardsContainer = ({ data }) => {
-  const arrOfImages = data.map((item) => <Card key={item._id} data={item} />);
+  const arrOfCards = data.map((item) => <Card key={item._id} data={item} />);
 
-  if (arrOfImages.length) {
-    return <div className={css.cardsContainer}>{arrOfImages}</div>;
+  if (arrOfCards.length) {
+    return <div className={css.cardsContainer}>{arrOfCards}</div>;
   }
   return <span className={css.notFoundMsg}>Results not found</span>;
 };
