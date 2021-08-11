@@ -22,7 +22,8 @@
       "react/react-in-jsx-scope": "off",
       "react/jsx-filename-extension": [0],
       "import/extensions": "off",
-      "no-underscore-dangle": "off"
+      "no-underscore-dangle": "off",
+      "no-shadow": "off"
     },
     "ignorePatterns": ["webpack.config.js", ".eslintrc.json","package-lock.json","package.json"],
     "settings": {

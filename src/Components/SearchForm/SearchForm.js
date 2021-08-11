@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import css from './Form.module.css';
+import { setSearchText } from '../../redux/actions/actions';
+import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
 
-const SearchForm = ({ onSearchHandler }) => {
-  const [searchText, setSearchText] = useState('');
+const SearchForm = ({ onSearchHandler, setSearchText, getAllCharacters }) => {
+  const [inputValue, setInputValue] = useState('');
 
   const onChangeHandler = (e) => {
     const newValue = e.target.value;
-    setSearchText(newValue);
+    setInputValue(newValue);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    onSearchHandler(searchText);
+    onSearchHandler(inputValue);
+    setSearchText(inputValue);
+    getAllCharacters();
   };
 
   return (
@@ -21,7 +26,7 @@ const SearchForm = ({ onSearchHandler }) => {
       <input
         type="text"
         className={css.input}
-        value={searchText}
+        value={inputValue}
         placeholder="Search text"
         onChange={(e) => onChangeHandler(e)}
       />
@@ -34,6 +39,13 @@ const SearchForm = ({ onSearchHandler }) => {
 
 SearchForm.propTypes = {
   onSearchHandler: PropTypes.func.isRequired,
+  getAllCharacters: PropTypes.func.isRequired,
+  setSearchText: PropTypes.func.isRequired,
 };
 
-export default SearchForm;
+const mapDispatchToProps = (dispatch) => ({
+  setSearchText: (searchText) => dispatch(setSearchText(searchText)),
+  getAllCharacters: () => dispatch(getAllCharacters()),
+});
+
+export default connect(null, mapDispatchToProps)(SearchForm);

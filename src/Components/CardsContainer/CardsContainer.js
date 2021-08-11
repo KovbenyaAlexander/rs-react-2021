@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import css from './CardsContainer.module.css';
 import Card from './Card';
 
-const CardsContainer = ({ data }) => {
-  const arrOfCards = data.map((item) => <Card key={item._id} data={item} />);
+const CardsContainer = ({ charactersData }) => {
+  const arrOfCards = charactersData.map((item) => (
+    <Card key={item._id} data={item} />
+  ));
 
   if (arrOfCards.length) {
     return <div className={css.cardsContainer}>{arrOfCards}</div>;
@@ -12,8 +15,12 @@ const CardsContainer = ({ data }) => {
   return <span className={css.notFoundMsg}>Results not found</span>;
 };
 
-export default CardsContainer;
+const mapStateToProps = (state) => ({
+  charactersData: state.charactersData,
+});
+
+export default connect(mapStateToProps)(CardsContainer);
 
 CardsContainer.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  charactersData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
