@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import css from './Pagination.module.css';
 import PaginationButton from './PaginationButton';
 import getPageNumbers from './PaginationService';
+import { setNumberOfPage } from '../../redux/actions/actions';
+import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
 
-const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
+const Pagination = ({
+  currentPage,
+  setNumberOfPage,
+  totalPages,
+  getAllCharacters,
+}) => {
   const numberButtonsOfPagination = 10;
   const pageNumbers = getPageNumbers(
     totalPages,
@@ -15,29 +23,27 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
   const buttons = [];
   pageNumbers.forEach((number) => {
     buttons.push(
-      <PaginationButton
-        key={number}
-        i={number}
-        setCurrentpage={setCurrentpage}
-        currentPage={currentPage}
-      />,
+      <PaginationButton key={number} i={number} currentPage={currentPage} />,
     );
   });
 
   const changePageHandler = (change) => {
     if (change === 'decr' && currentPage > 1) {
-      setCurrentpage((prev) => prev - 1);
-      return;
+      setNumberOfPage(currentPage - 1);
+      getAllCharacters();
     }
     if (change === 'inc' && currentPage < totalPages - 1) {
-      setCurrentpage((prev) => prev + 1);
+      setNumberOfPage(currentPage + 1);
+      getAllCharacters();
     }
 
     if (change === 'first') {
-      setCurrentpage(1);
+      setNumberOfPage(1);
+      getAllCharacters();
     }
     if (change === 'last') {
-      setCurrentpage(totalPages);
+      setNumberOfPage(totalPages);
+      getAllCharacters();
     }
   };
 
@@ -76,10 +82,21 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  currentPage: state.currentPage,
+  totalPages: state.totalPages,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setNumberOfPage: (number) => dispatch(setNumberOfPage(number)),
+  getAllCharacters: () => dispatch(getAllCharacters()),
+});
+
 Pagination.propTypes = {
-  setCurrentpage: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  setNumberOfPage: PropTypes.func.isRequired,
+  getAllCharacters: PropTypes.func.isRequired,
 };
 
-export default Pagination;
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

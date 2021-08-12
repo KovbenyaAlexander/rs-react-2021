@@ -1,12 +1,10 @@
-import { setDetailsInfo } from '../actions';
+import { setDetailsInfo, setLoadingStatus, setErrorStatus } from '../actions';
 
 const getDetailsInfo = () => (dispatch, getState) => {
+  dispatch(setLoadingStatus(true));
   const state = getState();
-  // console.log(state);
   const { detailsID } = state;
   const URL = `https://the-one-api.dev/v2/character/${detailsID}`;
-
-  console.log('THUNK');
 
   fetch(URL, {
     method: 'GET',
@@ -15,18 +13,20 @@ const getDetailsInfo = () => (dispatch, getState) => {
       Authorization: 'Bearer db3XQf7N45ifx9Pj1BAA',
     },
   })
-    .then((response) =>
-      // if (response.status === 429) {
-      // }
-      response.json(),
-    )
-    .then((Data) => {
-      // console.log(Data);
-
-      dispatch(setDetailsInfo(Data.docs[0]));
-      // setLoading(false);
+    .then((response) => {
+      if (response.status === 429) {
+        setErrorStatus(true);
+      }
+      return response.json();
     })
-    .catch(() => {});
+    .then((Data) => {
+      dispatch(setDetailsInfo(Data.docs[0]));
+      dispatch(setLoadingStatus(false));
+    })
+    .catch(() => {
+      dispatch(setLoadingStatus(false));
+      setErrorStatus(true);
+    });
 };
 
 export default getDetailsInfo;

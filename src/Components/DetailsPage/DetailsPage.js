@@ -5,24 +5,20 @@ import getDetailsInfo from '../../redux/actions/thunk/getDetailsInfo';
 import Loader from '../Loader/Loader';
 import css from './DetailsPage.module.css';
 
-const DetailsPage = ({ getDetailsInfo, detailsInfo }) => {
-  // const { data, loading, error } = getCaractersInfo(cardID);
+const DetailsPage = ({
+  getDetailsInfo, detailsInfo, isLoading, isError,
+}) => {
   useEffect(() => {
     getDetailsInfo();
   }, []);
-  console.log(detailsInfo);
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  // if (error?.msg) {
-  //   return <p>{error.msg}</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Unkown error</p>;
-  // }
+  if (isError) {
+    return <p>Error. Try to reload the page.</p>;
+  }
 
   return (
     <div className={css.detailsContainer}>
@@ -82,11 +78,11 @@ const DetailsPage = ({ getDetailsInfo, detailsInfo }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    detailsInfo: state.detailsInfo,
-  };
-};
+const mapStateToProps = (state) => ({
+  detailsInfo: state.detailsInfo,
+  isLoading: state.isLoading,
+  isError: state.isError,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getDetailsInfo: () => dispatch(getDetailsInfo()),
@@ -94,6 +90,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 DetailsPage.propTypes = {
   getDetailsInfo: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
   detailsInfo: PropTypes.shape({
     race: PropTypes.string,
     name: PropTypes.string,

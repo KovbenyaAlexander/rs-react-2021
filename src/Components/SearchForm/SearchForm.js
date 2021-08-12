@@ -5,7 +5,7 @@ import css from './Form.module.css';
 import { setSearchText } from '../../redux/actions/actions';
 import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
 
-const SearchForm = ({ onSearchHandler, setSearchText, getAllCharacters }) => {
+const SearchForm = ({ setSearchText, getAllCharacters }) => {
   const [inputValue, setInputValue] = useState('');
 
   const onChangeHandler = (e) => {
@@ -15,7 +15,6 @@ const SearchForm = ({ onSearchHandler, setSearchText, getAllCharacters }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    onSearchHandler(inputValue);
     setSearchText(inputValue);
     getAllCharacters();
   };
@@ -38,7 +37,6 @@ const SearchForm = ({ onSearchHandler, setSearchText, getAllCharacters }) => {
 };
 
 SearchForm.propTypes = {
-  onSearchHandler: PropTypes.func.isRequired,
   getAllCharacters: PropTypes.func.isRequired,
   setSearchText: PropTypes.func.isRequired,
 };

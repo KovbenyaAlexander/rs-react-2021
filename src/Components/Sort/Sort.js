@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './Sort.module.css';
+import { setSortType } from '../../redux/actions/actions';
+import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
 
-const Sort = ({ setSort }) => {
+const Sort = ({ setSortType, getAllCharacters }) => {
   const typeOfSortInit = {
     name: true,
     race: false,
@@ -47,9 +50,11 @@ const Sort = ({ setSort }) => {
     Object.keys(typeOfSort).forEach((sortValue) => {
       if (typeOfSort[sortValue]) {
         if (sortDirection.asc) {
-          setSort(`${sortValue}:asc`);
+          setSortType(`${sortValue}:asc`);
+          getAllCharacters();
         } else {
-          setSort(`${sortValue}:desc`);
+          setSortType(`${sortValue}:desc`);
+          getAllCharacters();
         }
       }
     });
@@ -178,8 +183,14 @@ const Sort = ({ setSort }) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  setSortType: (sort) => dispatch(setSortType(sort)),
+  getAllCharacters: () => dispatch(getAllCharacters()),
+});
+
 Sort.propTypes = {
-  setSort: PropTypes.func.isRequired,
+  setSortType: PropTypes.func.isRequired,
+  getAllCharacters: PropTypes.func.isRequired,
 };
 
-export default Sort;
+export default connect(null, mapDispatchToProps)(Sort);

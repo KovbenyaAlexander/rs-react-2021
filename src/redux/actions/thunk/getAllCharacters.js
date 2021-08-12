@@ -5,11 +5,7 @@ const getAllCharacters = () => (dispatch, getState) => {
   const { searchText } = state;
   const { currentPage } = state;
   const { cardsPerPage } = state;
-  const { sort } = state;
-  console.log('THUNK');
-
-  const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${sort}&name=/${searchText}/i`;
-
+  const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${state.sort}&name=/${searchText}/i`;
   fetch(URL, {
     method: 'GET',
     headers: {
@@ -23,7 +19,7 @@ const getAllCharacters = () => (dispatch, getState) => {
       return response.json();
     })
     .then((data) => {
-      dispatch(setCharactersData(data.docs));
+      dispatch(setCharactersData(data));
     })
     .catch(() => {});
 };
