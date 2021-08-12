@@ -1,87 +1,111 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import getCaractersInfo from '../../customHooks/getCaractersInfo';
+import { connect } from 'react-redux';
+import getDetailsInfo from '../../redux/actions/thunk/getDetailsInfo';
 import Loader from '../Loader/Loader';
 import css from './DetailsPage.module.css';
 
-const DetailsPage = ({ cardID }) => {
-  const { data, loading, error } = getCaractersInfo(cardID);
+const DetailsPage = ({ getDetailsInfo, detailsInfo }) => {
+  // const { data, loading, error } = getCaractersInfo(cardID);
+  useEffect(() => {
+    getDetailsInfo();
+  }, []);
+  console.log(detailsInfo);
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
-  if (error?.msg) {
-    return <p>{error.msg}</p>;
-  }
+  // if (error?.msg) {
+  //   return <p>{error.msg}</p>;
+  // }
 
-  if (error) {
-    return <p>Unkown error</p>;
-  }
+  // if (error) {
+  //   return <p>Unkown error</p>;
+  // }
 
-  if (data) {
-    return (
-      <div className={css.detailsContainer}>
-        <p>
-          <span className={css.fieldOfCard}>name:</span>
-          {data.name ? ` ${data.name}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>race:</span>
-          {data.race ? ` ${data.race}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>gender:</span>
-          {data.gender ? `${data.gender}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>race:</span>
-          {data.race ? ` ${data.race}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>birth:</span>
-          {data.birth ? ` ${data.birth}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>death:</span>
-          {data.death ? ` ${data.death}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>hair:</span>
-          {data.death ? ` ${data.death}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>realm:</span>
-          {data.realm ? ` ${data.realm}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>spouse:</span>
-          {data.spouse ? ` ${data.spouse}` : ' not found'}
-        </p>
-        <p>
-          <span className={css.fieldOfCard}>id:</span>
-          {data._id ? ` ${data._id}` : ' not found'}
-        </p>
-        {data.wikiUrl ? (
-          <a
-            href={data.wikiUrl}
-            className={css.link}
-            target="_blank"
-            rel="noreferrer"
-          >
-            link to wiki
-          </a>
-        ) : (
-          'link to wiki not found'
-        )}
-      </div>
-    );
-  }
-  return null;
+  return (
+    <div className={css.detailsContainer}>
+      <p>
+        <span className={css.fieldOfCard}>name:</span>
+        {detailsInfo.name ? ` ${detailsInfo.name}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>race:</span>
+        {detailsInfo.race ? ` ${detailsInfo.race}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>gender:</span>
+        {detailsInfo.gender ? `${detailsInfo.gender}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>race:</span>
+        {detailsInfo.race ? ` ${detailsInfo.race}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>birth:</span>
+        {detailsInfo.birth ? ` ${detailsInfo.birth}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>death:</span>
+        {detailsInfo.death ? ` ${detailsInfo.death}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>hair:</span>
+        {detailsInfo.hair ? ` ${detailsInfo.hair}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>realm:</span>
+        {detailsInfo.realm ? ` ${detailsInfo.realm}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>spouse:</span>
+        {detailsInfo.spouse ? ` ${detailsInfo.spouse}` : ' not found'}
+      </p>
+      <p>
+        <span className={css.fieldOfCard}>id:</span>
+        {detailsInfo._id ? ` ${detailsInfo._id}` : ' not found'}
+      </p>
+      {detailsInfo.wikiUrl ? (
+        <a
+          href={detailsInfo.wikiUrl}
+          className={css.link}
+          target="_blank"
+          rel="noreferrer"
+        >
+          link to wiki
+        </a>
+      ) : (
+        'link to wiki not found'
+      )}
+    </div>
+  );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    detailsInfo: state.detailsInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getDetailsInfo: () => dispatch(getDetailsInfo()),
+});
 
 DetailsPage.propTypes = {
-  cardID: PropTypes.string.isRequired,
+  getDetailsInfo: PropTypes.func.isRequired,
+  detailsInfo: PropTypes.shape({
+    race: PropTypes.string,
+    name: PropTypes.string,
+    gender: PropTypes.string,
+    birth: PropTypes.string,
+    death: PropTypes.string,
+    hair: PropTypes.string,
+    realm: PropTypes.string,
+    wikiUrl: PropTypes.string,
+    _id: PropTypes.string,
+    spouse: PropTypes.string,
+  }).isRequired,
 };
 
-export default DetailsPage;
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

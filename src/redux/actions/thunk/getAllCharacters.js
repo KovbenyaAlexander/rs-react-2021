@@ -6,7 +6,7 @@ const getAllCharacters = () => (dispatch, getState) => {
   const { currentPage } = state;
   const { cardsPerPage } = state;
   const { sort } = state;
-  console.log(state);
+  console.log('THUNK');
 
   const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${sort}&name=/${searchText}/i`;
 

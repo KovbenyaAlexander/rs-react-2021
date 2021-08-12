@@ -9,8 +9,9 @@ import Navigation from './Components/Header/Navigation/Navigation';
 import Page404 from './Components/Page404/Page404';
 import DetailsPage from './Components/DetailsPage/DetailsPage';
 import getAllCharacters from './redux/actions/thunk/getAllCharacters';
+import { setDetailsId } from './redux/actions/actions';
 
-const App = ({ getAllCharacters }) => {
+const App = ({ getAllCharacters, setDetailsId }) => {
   useEffect(() => {
     getAllCharacters();
   }, []);
@@ -52,7 +53,8 @@ const App = ({ getAllCharacters }) => {
             path="/details/:cardID"
             render={({ match }) => {
               const { cardID } = match.params;
-              return <DetailsPage cardID={cardID} />;
+              setDetailsId(cardID);
+              return <DetailsPage />;
             }}
           />
           <Route component={Page404} />
@@ -66,10 +68,14 @@ const mapDispatchToProps = (dispatch) => ({
   getAllCharacters: () => {
     dispatch(getAllCharacters());
   },
+  setDetailsId: (id) => {
+    dispatch(setDetailsId(id));
+  },
 });
 
 App.propTypes = {
   getAllCharacters: PropTypes.func.isRequired,
+  setDetailsId: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(App);

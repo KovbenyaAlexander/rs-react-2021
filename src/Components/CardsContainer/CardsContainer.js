@@ -19,6 +19,11 @@ const mapStateToProps = (state) => ({
   charactersData: state.charactersData,
 });
 
+// const mapDispatchToProps = (dispatch) => ({
+//   setSearchText: (searchText) => dispatch(setSearchText(searchText)),
+//   getAllCharacters: () => dispatch(getAllCharacters()),
+// });
+
 export default connect(mapStateToProps)(CardsContainer);
 
 CardsContainer.propTypes = {

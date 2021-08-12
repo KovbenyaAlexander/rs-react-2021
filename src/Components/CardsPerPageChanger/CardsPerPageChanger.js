@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import css from './CardsPerPage.module.css';
+import { setCardPerPageValue } from '../../redux/actions/actions';
+import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
 
-const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
+const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
   const [inputValue, setInputvalue] = useState('20');
   const [error, setError] = useState(true);
 
@@ -29,8 +32,8 @@ const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (!error) {
-      setCardsPerPage(Number(inputValue));
-      onChangePageHandler(1);
+      setCardPerPageValue(Number(inputValue));
+      getAllCharacters();
     }
   };
 
@@ -55,9 +58,18 @@ const ImagesPerPageChanger = ({ setCardsPerPage, onChangePageHandler }) => {
   );
 };
 
-ImagesPerPageChanger.propTypes = {
-  setCardsPerPage: PropTypes.func.isRequired,
-  onChangePageHandler: PropTypes.func.isRequired,
+const mapDispatchToProps = (dispatch) => ({
+  setCardPerPageValue: (inputValue) => {
+    dispatch(setCardPerPageValue(inputValue));
+  },
+  getAllCharacters: () => {
+    dispatch(getAllCharacters());
+  },
+});
+
+CardsPerPageChanger.propTypes = {
+  setCardPerPageValue: PropTypes.func.isRequired,
+  getAllCharacters: PropTypes.func.isRequired,
 };
 
-export default ImagesPerPageChanger;
+export default connect(null, mapDispatchToProps)(CardsPerPageChanger);
