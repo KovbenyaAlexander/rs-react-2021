@@ -32,7 +32,7 @@ const Pagination = ({
       setNumberOfPage(currentPage - 1);
       getAllCharacters();
     }
-    if (change === 'inc' && currentPage < totalPages - 1) {
+    if (change === 'inc' && currentPage < totalPages) {
       setNumberOfPage(currentPage + 1);
       getAllCharacters();
     }

@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import HomePage from './Components/HomePage/HomePage';
-import AboutPage from './Components/AboutPage/AboutPage';
+import HomePage from './Components/Pages/HomePage/HomePage';
+import AboutPage from './Components/Pages/AboutPage/AboutPage';
 import Navigation from './Components/Header/Navigation/Navigation';
-import Page404 from './Components/Page404/Page404';
-import DetailsPage from './Components/DetailsPage/DetailsPage';
+import Page404 from './Components/Pages/Page404/Page404';
+import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
 import getAllCharacters from './redux/actions/thunk/getAllCharacters';
 import { setDetailsId } from './redux/actions/actions';
 

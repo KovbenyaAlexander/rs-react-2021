@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import getDetailsInfo from '../../redux/actions/thunk/getDetailsInfo';
-import Loader from '../Loader/Loader';
+import getDetailsInfo from '../../../redux/actions/thunk/getDetailsInfo';
+import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
 const DetailsPage = ({
