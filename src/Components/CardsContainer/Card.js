@@ -33,7 +33,7 @@ const Card = ({ data }) => (
       </p>
       <p>
         <span className={css.fieldOfCard}>hair:</span>
-        {data.death ? ` ${data.death}` : ' not found'}
+        {data.hair ? ` ${data.hair}` : ' not found'}
       </p>
       <p>
         <span className={css.fieldOfCard}>realm:</span>
