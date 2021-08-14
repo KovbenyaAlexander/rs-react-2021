@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import css from './Form.module.css';
-import { setSearchText } from '../../redux/actions/actions';
-import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
+import { setSearchText } from '../../../../../redux/actions/actions';
+import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacters';
 
 const SearchForm = ({ setSearchText, getAllCharacters }) => {
   const [inputValue, setInputValue] = useState('');

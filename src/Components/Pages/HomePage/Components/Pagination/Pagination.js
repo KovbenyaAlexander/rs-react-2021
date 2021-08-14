@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import css from './Pagination.module.css';
-import PaginationButton from './PaginationButton';
+import PaginationButton from './PaginationButton/PaginationButton';
 import getPageNumbers from './PaginationService';
-import { setNumberOfPage } from '../../redux/actions/actions';
-import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
+import { setNumberOfPage } from '../../../../../redux/actions/actions';
+import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacters';
 
 const Pagination = ({
   currentPage,

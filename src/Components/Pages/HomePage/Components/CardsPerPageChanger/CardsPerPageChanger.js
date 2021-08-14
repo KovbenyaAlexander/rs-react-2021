@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import css from './CardsPerPage.module.css';
-import { setCardPerPageValue } from '../../redux/actions/actions';
-import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
+import { setCardPerPageValue } from '../../../../../redux/actions/actions';
+import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacters';
 
 const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
   const [inputValue, setInputvalue] = useState('20');

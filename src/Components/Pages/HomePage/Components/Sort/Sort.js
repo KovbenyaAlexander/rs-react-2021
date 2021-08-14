@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './Sort.module.css';
-import { setSortType } from '../../redux/actions/actions';
-import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
+import { setSortType } from '../../../../../redux/actions/actions';
+import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacters';
 
 const Sort = ({ setSortType, getAllCharacters }) => {
   const typeOfSortInit = {

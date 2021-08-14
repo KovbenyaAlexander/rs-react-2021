@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import css from './CardsContainer.module.css';
-import Card from './Card';
+import Card from './Card/Card';
 
 const CardsContainer = ({ charactersData }) => {
   const arrOfCards = charactersData.map((item) => (
@@ -18,11 +18,6 @@ const CardsContainer = ({ charactersData }) => {
 const mapStateToProps = (state) => ({
   charactersData: state.charactersData,
 });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   setSearchText: (searchText) => dispatch(setSearchText(searchText)),
-//   getAllCharacters: () => dispatch(getAllCharacters()),
-// });
 
 export default connect(mapStateToProps)(CardsContainer);
 

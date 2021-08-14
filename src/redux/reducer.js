@@ -24,8 +24,6 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action);
-
   switch (action.type) {
     case SET_SEARCH_TEXT:
       return { ...state, currentPage: 1, searchText: action.payload };

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import css from './PaginationButton.module.css';
-import getAllCharacters from '../../redux/actions/thunk/getAllCharacters';
-import { setNumberOfPage } from '../../redux/actions/actions';
+import getAllCharacters from '../../../../../../redux/actions/thunk/getAllCharacters';
+import { setNumberOfPage } from '../../../../../../redux/actions/actions';
 
 const PaginationButton = ({
   i,
