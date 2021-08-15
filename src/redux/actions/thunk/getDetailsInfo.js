@@ -15,7 +15,12 @@ const getDetailsInfo = () => (dispatch, getState) => {
   })
     .then((response) => {
       if (response.status === 429) {
-        setErrorStatus(true);
+        dispatch(
+          setErrorStatus({
+            isError: true,
+            errorMsg: 'Too many requests. Try later.',
+          }),
+        );
       }
       return response.json();
     })

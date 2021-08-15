@@ -14,12 +14,18 @@ const getAllCharacters = () => (dispatch, getState) => {
   fetch(URL, {
     method: 'GET',
     headers: {
+      // Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
       Authorization: 'Bearer db3XQf7N45ifx9Pj1BAA',
     },
   })
     .then((response) => {
       if (response.status === 429) {
-        setErrorStatus(true);
+        dispatch(
+          setErrorStatus({
+            isError: true,
+            errorMsg: 'Too many requests. Try later.',
+          }),
+        );
       }
       return response.json();
     })
