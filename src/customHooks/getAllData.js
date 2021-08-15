@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useFetch(searchText, sort, currentPage, cardsPerPage) {
+function getAllData(searchText, sort, currentPage, cardsPerPage) {
   const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${sort}&name=/${searchText}/i`;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,6 +14,7 @@ function useFetch(searchText, sort, currentPage, cardsPerPage) {
     fetch(URL, {
       method: 'GET',
       headers: {
+        // Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
         Authorization: 'Bearer db3XQf7N45ifx9Pj1BAA',
       },
     })
@@ -38,4 +39,4 @@ function useFetch(searchText, sort, currentPage, cardsPerPage) {
 
   return { data, loading, error };
 }
-export default useFetch;
+export default getAllData;

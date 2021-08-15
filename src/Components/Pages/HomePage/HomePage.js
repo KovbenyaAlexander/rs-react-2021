@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useFetch from '../../../customHooks/useFetch';
+import getAllData from '../../../customHooks/getAllData';
 import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Pagination from './Components/Pagination/Pagination';
 import Loader from '../../Loader/Loader';
@@ -11,7 +11,7 @@ const App = () => {
   const [currentPage, setCurrentpage] = useState(1);
   const [searchText, setSearchText] = useState('');
   const [sort, setSort] = useState('name:asc');
-  const { data, loading, error } = useFetch(
+  const { data, loading, error } = getAllData(
     searchText,
     sort,
     currentPage,
