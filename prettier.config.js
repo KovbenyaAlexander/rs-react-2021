@@ -5,6 +5,6 @@ module.exports = {
   tabWidth: 2,
   semi: true,
   arrowParens: 'always',
-  endOfLine: 'lf',
+  endOfLine: 'crlf',
   singleQuote: true,
 };

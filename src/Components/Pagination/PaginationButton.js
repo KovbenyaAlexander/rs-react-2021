@@ -7,7 +7,8 @@ const PaginationButton = ({ i, setCurrentpage, currentPage }) => {
     setCurrentpage(newPageNumber);
   };
 
-  const cssClassesOfButton = currentPage === i ? `${css.btn} ${css.active}` : `${css.btn}`;
+  const cssClassesOfButton =
+    currentPage === i ? `${css.btn} ${css.active}` : `${css.btn}`;
 
   if (i > 0) {
     return (
