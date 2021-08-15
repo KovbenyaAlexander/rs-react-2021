@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getCaractersInfo from '../../customHooks/getCaractersInfo';
-import Loader from '../Loader/Loader';
+import getCaractersInfo from '../../../customHooks/getCaractersInfo';
+import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
 const DetailsPage = ({ cardID }) => {

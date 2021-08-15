@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import useFetch from '../../customHooks/useFetch';
-import CardsContainer from '../CardsContainer/CardsContainer';
-import Pagination from '../Pagination/Pagination';
-import Loader from '../Loader/Loader';
-import Main from '../Main/Main';
+import useFetch from '../../../customHooks/useFetch';
+import CardsContainer from './Components/CardsContainer/CardsContainer';
+import Pagination from './Components/Pagination/Pagination';
+import Loader from '../../Loader/Loader';
+import Main from './Components/Main/Main';
 import css from './HomePage.module.css';
 
 const App = () => {
