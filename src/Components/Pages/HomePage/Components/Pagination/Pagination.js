@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Pagination.module.css';
-import PaginationButton from './PaginationButton';
+import PaginationButton from './PaginationButton/PaginationButton';
 import getPageNumbers from './PaginationService';
 
 const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
@@ -29,7 +29,7 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
       setCurrentpage((prev) => prev - 1);
       return;
     }
-    if (change === 'inc' && currentPage < totalPages - 1) {
+    if (change === 'inc' && currentPage < totalPages) {
       setCurrentpage((prev) => prev + 1);
     }
 
