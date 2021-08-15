@@ -28,8 +28,8 @@ const Sort = ({ setSortType, getAllCharacters }) => {
     const currentActiveRadioButton = e.target.id;
 
     if (
-      currentActiveRadioButton !== 'asc'
-      && currentActiveRadioButton !== 'desc'
+      currentActiveRadioButton !== 'asc' &&
+      currentActiveRadioButton !== 'desc'
     ) {
       setCheckedField(() => ({
         ...typeOfSortInit,

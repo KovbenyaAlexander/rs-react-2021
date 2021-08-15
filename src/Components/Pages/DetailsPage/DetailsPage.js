@@ -5,9 +5,7 @@ import getDetailsInfo from '../../../redux/actions/thunk/getDetailsInfo';
 import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
-const DetailsPage = ({
-  getDetailsInfo, detailsInfo, isLoading, isError,
-}) => {
+const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
   useEffect(() => {
     getDetailsInfo();
   }, []);
