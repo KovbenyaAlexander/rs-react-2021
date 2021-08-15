@@ -29,7 +29,7 @@ const Pagination = ({ totalPages, setCurrentpage, currentPage }) => {
       setCurrentpage((prev) => prev - 1);
       return;
     }
-    if (change === 'inc' && currentPage < totalPages - 1) {
+    if (change === 'inc' && currentPage < totalPages) {
       setCurrentpage((prev) => prev + 1);
     }
 
