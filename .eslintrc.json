@@ -1,7 +1,8 @@
 {
   "env": {
       "browser": true,
-      "es2021": true
+      "es2021": true,
+      "jest/globals": true
   },
   "extends": [
       "plugin:react/recommended",
@@ -17,7 +18,7 @@
       "sourceType": "module"
   },
   "plugins": [
-      "react", "prettier"
+      "react", "prettier", "jest"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
@@ -36,3 +37,4 @@
     }
 }
 }
+
