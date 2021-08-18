@@ -21,7 +21,7 @@ const SearchForm = ({ setSearchText, getAllCharacters }) => {
 
   return (
     <form className={css.formContainer} onSubmit={(e) => onSubmitHandler(e)}>
-      <span className={css.descriptionOfInput}>Serach characters by name:</span>
+      <h2 className={css.descriptionOfInput}>Serach characters by name:</h2>
       <input
         type="text"
         className={css.input}
