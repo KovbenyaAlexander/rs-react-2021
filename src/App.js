@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import HomePage from './Components/Pages/HomePage/HomePage';
 import AboutPage from './Components/Pages/AboutPage/AboutPage';
-// import Navigation from './Components/Header/Navigation/Navigation';
 import Header from './Components/Header/Header';
 import Page404 from './Components/Pages/Page404/Page404';
 import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
@@ -19,8 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      {/* <Navigation /> */}
+    <div className="App" data-testid="App">
       <Header />
       <TransitionGroup>
         <Switch>
@@ -33,7 +30,7 @@ const App = () => {
                 unmountOnExit
               >
                 <div className="page">
-                  <HomePage />
+                  <HomePage data-testid="HomePage" />
                 </div>
               </CSSTransition>
             )}

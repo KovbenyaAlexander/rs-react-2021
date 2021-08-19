@@ -9,11 +9,6 @@ const getPageNumbers = (totalPages, max, currentPage) => {
   }
 
   const from = to - max;
-  console.log(`total ${totalPages}`);
-  console.log(`max ${max}`);
-  console.log(`currentPage ${currentPage}`);
-
-  console.log(Array.from({ length: max }, (_, i) => i + 1 + from));
 
   return Array.from({ length: max }, (_, i) => i + 1 + from);
 };
