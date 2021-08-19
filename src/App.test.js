@@ -10,6 +10,8 @@ import reducer from './redux/reducer';
 import { createStore } from 'redux';
 import { expect } from '@jest/globals';
 import '@testing-library/jest-dom/extend-expect';
+import App from './App';
+import getPageNumbers from './Components/Pages/HomePage/Components/Pagination/PaginationService';
 
 const sum = (a, b) => {
   return a + b;
@@ -29,11 +31,19 @@ const renderWithRedux = (
   };
 };
 
-describe('Redux testing', () => {
-  it('test', () => {
-    const { getByRole } = renderWithRedux(<SearchForm />);
-    expect(getByRole('heading')).toHaveTextContent(
-      'Serach characters by name:',
-    );
+// describe('Redux testing', () => {
+//   it('test', () => {
+//     const { getByRole } = renderWithRedux(<SearchForm />);
+//     expect(getByRole('heading')).toHaveTextContent(
+//       'Serach characters by name:',
+//     );
+//   });
+// });
+
+describe('Home page', () => {
+  it('pagination generation testing', () => {
+    expect(getPageNumbers(47, 10, 1)).toStrictEqual([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    ]);
   });
 });

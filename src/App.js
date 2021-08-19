@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import HomePage from './Components/Pages/HomePage/HomePage';
 import AboutPage from './Components/Pages/AboutPage/AboutPage';
@@ -12,9 +12,10 @@ import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
 import getAllCharacters from './redux/actions/thunk/getAllCharacters';
 import { setDetailsId } from './redux/actions/actions';
 
-const App = ({ getAllCharacters, setDetailsId }) => {
+const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    getAllCharacters();
+    dispatch(getAllCharacters());
   }, []);
 
   return (
@@ -55,7 +56,7 @@ const App = ({ getAllCharacters, setDetailsId }) => {
             path="/details/:cardID"
             render={({ match }) => {
               const { cardID } = match.params;
-              setDetailsId(cardID);
+              dispatch(setDetailsId(cardID));
               return <DetailsPage />;
             }}
           />
@@ -66,18 +67,18 @@ const App = ({ getAllCharacters, setDetailsId }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getAllCharacters: () => {
-    dispatch(getAllCharacters());
-  },
-  setDetailsId: (id) => {
-    dispatch(setDetailsId(id));
-  },
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getAllCharacters: () => {
+//     dispatch(getAllCharacters());
+//   },
+//   setDetailsId: (id) => {
+//     dispatch(setDetailsId(id));
+//   },
+// });
 
-App.propTypes = {
-  getAllCharacters: PropTypes.func.isRequired,
-  setDetailsId: PropTypes.func.isRequired,
-};
+// App.propTypes = {
+//   getAllCharacters: PropTypes.func.isRequired,
+//   setDetailsId: PropTypes.func.isRequired,
+// };
 
-export default connect(null, mapDispatchToProps)(App);
+export default App;
