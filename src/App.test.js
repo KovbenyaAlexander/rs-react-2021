@@ -28,6 +28,7 @@ import {
   setSortType,
   setNumberOfPage,
 } from './redux/actions/actions';
+import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
 global.fetch = require('node-fetch'); // shouldn't it be used?
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -87,6 +88,31 @@ describe('React Router', () => {
     );
     expect(container.innerHTML).toMatch('Error 404. Page not found.');
   });
+
+  it(`should navigate to home page if route is '/'`, () => {
+    const history = createMemoryHistory();
+    history.push('/');
+    const { container } = render(
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>,
+    );
+
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Pagination />
+        </Router>
+      </Provider>,
+    );
+    const PaginationComponent = getByTestId('Pagination');
+    expect(PaginationComponent).toBeInTheDocument();
+
+    expect(container.innerHTML).toMatch('Search characters by name:');
+    expect(container.innerHTML).toMatch('Cards per page:');
+  });
 });
 
 describe('Redux actions', () => {
@@ -136,7 +162,7 @@ All files                                                             |   21.18 
 All files                                                             |    29.2 |     4.67 |   11.58 |   30.34 | // 404 testing
 All files                                                             |    29.6 |     4.67 |   12.63 |   30.77 | // AboutPage rendering
 All files                                                             |    32.8 |     4.67 |   21.05 |   34.19 | // Actions
-*/
+All files                                                             |    50.8 |    17.76 |   38.95 |      50 | // HomePage testing
 
 /*
 describe('React Router', () => {

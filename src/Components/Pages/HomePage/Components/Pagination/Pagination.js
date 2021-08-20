@@ -48,7 +48,7 @@ const Pagination = ({
   };
 
   return (
-    <div className={css.paginationContainer}>
+    <div className={css.paginationContainer} data-testid="Pagination">
       <button
         className={css.btn}
         onClick={() => changePageHandler('first')}

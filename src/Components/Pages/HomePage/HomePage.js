@@ -27,7 +27,7 @@ const HomePage = ({ isLoading, isError }) => {
         <Loader />
       ) : (
         <>
-          <Pagination />
+          <Pagination data-testid="Pagination" />
           <CardsContainer />
         </>
       )}
