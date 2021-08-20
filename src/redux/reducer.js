@@ -1,7 +1,7 @@
 import {
   SET_SEARCH_TEXT,
   SET_CHARACTERS_DATA,
-  CARD_PER_PAGE_VALUE,
+  SET_CARD_PER_PAGE_VALUE,
   SET_DETAILS_ID,
   SET_DETAILS_INFO,
   SET_LOADING_STATUS,
@@ -28,7 +28,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH_TEXT:
       return { ...state, currentPage: 1, searchText: action.payload };
-    case CARD_PER_PAGE_VALUE:
+    case SET_CARD_PER_PAGE_VALUE:
       return { ...state, currentPage: 1, cardsPerPage: action.payload };
     case SET_DETAILS_ID:
       return { ...state, detailsID: action.payload };

@@ -17,7 +17,17 @@ import App from './App';
 import reducer from './redux/reducer';
 import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
 import AboutPage from './Components/Pages/AboutPage/AboutPage';
-
+import {
+  setDetailsId,
+  setDetailsInfo,
+  setCardPerPageValue,
+  setCharactersData,
+  setSearchText,
+  setLoadingStatus,
+  setErrorStatus,
+  setSortType,
+  setNumberOfPage,
+} from './redux/actions/actions';
 global.fetch = require('node-fetch'); // shouldn't it be used?
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -79,11 +89,53 @@ describe('React Router', () => {
   });
 });
 
+describe('Redux actions', () => {
+  it('should return correct action', () => {
+    expect(setDetailsId('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_DETAILS_ID',
+    });
+    expect(setDetailsInfo('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_DETAILS_INFO',
+    });
+    expect(setCardPerPageValue('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_CARD_PER_PAGE_VALUE',
+    });
+    expect(setCharactersData('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_CHARACTERS_DATA',
+    });
+    expect(setSearchText('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_SEARCH_TEXT',
+    });
+    expect(setLoadingStatus('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_LOADING_STATUS',
+    });
+    expect(setErrorStatus('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_ERROR_STATUS',
+    });
+    expect(setSortType('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_SORT_TYPE',
+    });
+    expect(setNumberOfPage('payload')).toStrictEqual({
+      payload: 'payload',
+      type: 'SET_NUMBER_OF_PAGE',
+    });
+  });
+});
+
 /*
 All files                                                             |    18.8 |        0 |       0 |   20.09 | // init
 All files                                                             |   21.18 |     1.87 |    3.13 |   22.27 | // pagination generation
 All files                                                             |    29.2 |     4.67 |   11.58 |   30.34 | // 404 testing
 All files                                                             |    29.6 |     4.67 |   12.63 |   30.77 | // AboutPage rendering
+All files                                                             |    32.8 |     4.67 |   21.05 |   34.19 | // Actions
 */
 
 /*

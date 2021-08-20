@@ -1,7 +1,7 @@
 import {
   SET_SEARCH_TEXT,
   SET_CHARACTERS_DATA,
-  CARD_PER_PAGE_VALUE,
+  SET_CARD_PER_PAGE_VALUE,
   SET_DETAILS_ID,
   SET_DETAILS_INFO,
   SET_LOADING_STATUS,
@@ -26,7 +26,7 @@ export function setCharactersData(data) {
 
 export function setCardPerPageValue(value) {
   return {
-    type: CARD_PER_PAGE_VALUE,
+    type: SET_CARD_PER_PAGE_VALUE,
     payload: value,
   };
 }
