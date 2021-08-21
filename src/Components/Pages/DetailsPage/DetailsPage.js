@@ -6,6 +6,14 @@ import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
 const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
+  // console.log(`INFO`);
+  // console.log(detailsInfo);
+  // console.log(`------------`);
+  // console.log(`isLoading-->> ${isLoading}`);
+  // console.log(`------------`);
+  // console.log(`isError-->>${isError}`);
+  // console.log(`------------`);
+
   useEffect(() => {
     getDetailsInfo();
   }, []);
@@ -21,43 +29,63 @@ const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
   return (
     <div className={css.detailsContainer}>
       <p>
-        <span className={css.fieldOfCard}>name:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          name:
+        </span>
         {detailsInfo.name ? ` ${detailsInfo.name}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>race:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          race:
+        </span>
         {detailsInfo.race ? ` ${detailsInfo.race}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>gender:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          gender:
+        </span>
         {detailsInfo.gender ? `${detailsInfo.gender}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>race:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          race:
+        </span>
         {detailsInfo.race ? ` ${detailsInfo.race}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>birth:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          birth:
+        </span>
         {detailsInfo.birth ? ` ${detailsInfo.birth}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>death:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          death:
+        </span>
         {detailsInfo.death ? ` ${detailsInfo.death}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>hair:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          hair:
+        </span>
         {detailsInfo.hair ? ` ${detailsInfo.hair}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>realm:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          realm:
+        </span>
         {detailsInfo.realm ? ` ${detailsInfo.realm}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>spouse:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          spouse:
+        </span>
         {detailsInfo.spouse ? ` ${detailsInfo.spouse}` : ' not found'}
       </p>
       <p>
-        <span className={css.fieldOfCard}>id:</span>
+        <span className={css.fieldOfCard} data-testid="detailsItem">
+          id:
+        </span>
         {detailsInfo._id ? ` ${detailsInfo._id}` : ' not found'}
       </p>
       {detailsInfo.wikiUrl ? (
@@ -66,6 +94,7 @@ const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
           className={css.link}
           target="_blank"
           rel="noreferrer"
+          data-testid="detailsItem"
         >
           link to wiki
         </a>

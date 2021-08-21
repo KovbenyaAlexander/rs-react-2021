@@ -3,7 +3,12 @@
  */
 
 import React from 'react';
-import { getByRole, render, screen } from '@testing-library/react';
+import {
+  findAllByText,
+  getByRole,
+  render,
+  screen,
+} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { expect } from '@jest/globals';
@@ -18,6 +23,8 @@ import reducer from './redux/reducer';
 import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
 import AboutPage from './Components/Pages/AboutPage/AboutPage';
 import HomePage from './Components/Pages/HomePage/HomePage';
+import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
+import axios from 'axios';
 import {
   setDetailsId,
   setDetailsInfo,
@@ -31,6 +38,8 @@ import {
 } from './redux/actions/actions';
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
 global.fetch = require('node-fetch'); // shouldn't it be used?
+
+jest.mock('axios');
 
 const customRender = (
   component,
@@ -167,6 +176,37 @@ describe('Redux actions', () => {
   });
 });
 
+describe('Details Page', () => {
+  it('Fetch data from api testing', async () => {
+    const mockData = {
+      birth: 'birth',
+      death: 'death',
+      gender: 'Female___',
+      hair: 'hair',
+      height: 'height',
+      name: 'Adanel',
+      race: 'Human',
+      realm: 'realm',
+      spouse: 'Belemir',
+      wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
+      _id: 'testID',
+    };
+    const history = createMemoryHistory();
+    history.push('/details/testID');
+    const { findAllByTestId } = customRender(
+      <DetailsPage />,
+      {
+        isLoading: false,
+        detailsInfo: mockData,
+        isError: false,
+      },
+      { history: history },
+    );
+    const items = await findAllByTestId(/detailsItem/i);
+    expect(items).toHaveLength(11);
+  });
+});
+
 /*
 All files                                                             |    18.8 |        0 |       0 |   20.09 | // init
 All files                                                             |   21.18 |     1.87 |    3.13 |   22.27 | // pagination generation
@@ -175,40 +215,5 @@ All files                                                             |    29.6 
 All files                                                             |    32.8 |     4.67 |   21.05 |   34.19 | // Actions
 All files                                                             |    50.8 |    17.76 |   38.95 |      50 | // HomePage testing
 All files                                                             |    53.6 |     24.3 |   41.05 |   52.56 | // Error message testing
-/*
-describe('React Router', () => {
-  it('should navigate to error page if route is wrong', () => {
-    const { container } = renderWithRouter(<App />, {
-      route: '/wrong-route',
-    });
-    expect(container.innerHTML).toMatch('Error 404. Page not found.');
-  });
-});
-
+All files                                                             |   63.75 |    40.19 |   53.68 |   62.13 | // Details page fetch
 */
-
-/*
-
-describe('React Router', () => {
-  it('should render the home page', () => {
-
-    
-    const { container, getByTestId } = renderWithRouter(<App />);
-    const page = screen.getByTestId('HomePage');
-    expect(page).toBeInTheDocument();
-
-
-
-});
-
-
-*/
-
-// describe('Redux testing', () => {
-//   it('test', () => {
-//     const { getByRole } = renderWithRedux(<SearchForm />);
-//     expect(getByRole('heading')).toHaveTextContent(
-//       'Serach characters by name:',
-//     );
-//   });
-// });

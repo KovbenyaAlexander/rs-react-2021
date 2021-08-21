@@ -21,6 +21,7 @@ const getDetailsInfo = () => (dispatch, getState) => {
             errorMsg: 'Too many requests. Try later.',
           }),
         );
+        dispatch(setLoadingStatus(false));
       }
       return response.json();
     })
@@ -32,6 +33,7 @@ const getDetailsInfo = () => (dispatch, getState) => {
       dispatch(setLoadingStatus(false));
       setErrorStatus(true);
     });
+  // dispatch(setLoadingStatus(false));
 };
 
 export default getDetailsInfo;

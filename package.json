@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "axios": "^0.21.1",
     "cross-fetch": "^3.1.4",
     "editorconfig": "^0.15.3",
     "node-fetch": "^2.6.1",
@@ -70,11 +71,15 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.9"
   },
   "jest": {
     "moduleNameMapper": {
-      "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+      "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "setupFilesAfterEnv": [
+        "./App.test.js"
+      ]
     }
   }
 }
