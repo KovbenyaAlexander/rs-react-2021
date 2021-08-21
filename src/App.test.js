@@ -5,6 +5,7 @@
 import React from 'react';
 import {
   findAllByText,
+  fireEvent,
   getByRole,
   render,
   screen,
@@ -156,6 +157,13 @@ describe('Home page', () => {
 
     expect(container.innerHTML).toMatch(/Results not found/i);
   });
+
+  it('Search form onchange testing', async () => {
+    const { queryByPlaceholderText } = customRender(<SearchForm />);
+    const searchInput = queryByPlaceholderText('Search text');
+    fireEvent.change(searchInput, { target: { value: 'JEST' } });
+    expect(searchInput.value).toBe('JEST');
+  });
 });
 
 describe('React Router', () => {
@@ -305,4 +313,5 @@ All files                                                             |    53.6 
 All files                                                             |   63.75 |    40.19 |   53.68 |   62.13 | // Details page fetch
 All files                                                             |   65.08 |    49.53 |   54.74 |   63.56 | // Card rendering
 All files                                                             |   64.94 |     48.6 |   54.74 |    63.4 | // ? Card rendering - error and data not found cases
+All files                                                             |   66.14 |     48.6 |   56.84 |   64.68 | // SearchForm onchange
 */
