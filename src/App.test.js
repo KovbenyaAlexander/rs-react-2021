@@ -37,6 +37,7 @@ import {
   setNumberOfPage,
 } from './redux/actions/actions';
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
+import { exact } from 'prop-types';
 global.fetch = require('node-fetch'); // shouldn't it be used?
 
 jest.mock('axios');
@@ -177,7 +178,7 @@ describe('Redux actions', () => {
 });
 
 describe('Details Page', () => {
-  it('Fetch data from api testing', async () => {
+  it('Fetch data from api testing - succes', async () => {
     const mockData = {
       birth: 'birth',
       death: 'death',
@@ -204,6 +205,23 @@ describe('Details Page', () => {
     );
     const items = await findAllByTestId(/detailsItem/i);
     expect(items).toHaveLength(11);
+  });
+
+  it('Fetch data from api testing - fail', async () => {
+    const mockData = null;
+    const history = createMemoryHistory();
+    history.push('/details/testID');
+    const { findByTestId } = customRender(
+      <DetailsPage />,
+      {
+        isLoading: false,
+        detailsInfo: mockData,
+        isError: true,
+      },
+      { history: history },
+    );
+    const items = await findByTestId(/detailsErrorMsg/i);
+    expect(items).toBeInTheDocument();
   });
 });
 

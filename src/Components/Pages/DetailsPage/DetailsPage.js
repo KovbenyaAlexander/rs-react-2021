@@ -6,14 +6,6 @@ import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
 const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
-  // console.log(`INFO`);
-  // console.log(detailsInfo);
-  // console.log(`------------`);
-  // console.log(`isLoading-->> ${isLoading}`);
-  // console.log(`------------`);
-  // console.log(`isError-->>${isError}`);
-  // console.log(`------------`);
-
   useEffect(() => {
     getDetailsInfo();
   }, []);
@@ -23,7 +15,7 @@ const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
   }
 
   if (isError) {
-    return <p>Error. Try to reload the page.</p>;
+    return <p data-testid="detailsErrorMsg">Error. Try to reload the page.</p>;
   }
 
   return (
