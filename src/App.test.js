@@ -32,37 +32,9 @@ import {
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
 global.fetch = require('node-fetch'); // shouldn't it be used?
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
-
-// const renderWithRedux = (
-//   component,
-//   { initialState, store = createStore(reducer, initialState) } = {},
-// ) => {
-//   return {
-//     ...render(<Provider store={store}>{component}</Provider>),
-//     store,
-//   };
-// };
-
-// const renderWithRouter = (
-//   component,
-//   {
-//     route = '/',
-//     history = createMemoryHistory({ initialEntries: [route] }),
-//   } = {},
-// ) => {
-//   const Wrapper = ({ children }) => (
-//     <Router history={history}>{children}</Router>
-//   );
-//   return {
-//     ...render(component, { wrapper: Wrapper }),
-//     history,
-//   };
-// };
-
 const customRender = (
   component,
-  { initialState, store = createStore(reducer, initialState) } = {},
+  initialState = {},
   {
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
@@ -71,6 +43,13 @@ const customRender = (
   const Wrapper = ({ children }) => (
     <Router history={history}>{children}</Router>
   );
+
+  const store = createStore(
+    reducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(thunk)),
+  );
+
   return {
     ...render(<Provider store={store}>{component}</Provider>, {
       wrapper: Wrapper,
@@ -109,7 +88,8 @@ describe('Home page', () => {
 
   it('Error message testing', () => {
     const { container } = customRender(<HomePage />, {
-      initialState: { ...initialState, isError: true },
+      ...initialState,
+      isError: true,
     });
 
     expect(container.innerHTML).toMatch(/Error. Try to reload the page./i);
@@ -120,36 +100,26 @@ describe('React Router', () => {
   it('Should navigate to error page if route is wrong', () => {
     const history = createMemoryHistory();
     history.push('/wrong-route');
-    const { container } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <App />
-        </Router>
-      </Provider>,
+    const { container } = customRender(
+      <App />,
+      { initialState: initialState },
+      { history: history },
     );
+
     expect(container.innerHTML).toMatch('Error 404. Page not found.');
   });
 
   it(`Should navigate to home page if route is '/'`, () => {
     const history = createMemoryHistory();
     history.push('/');
-    const { container } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <App />
-        </Router>
-      </Provider>,
-    );
+    const { container } = customRender(<App />, initialState, { history });
 
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <Router history={history}>
-          <Pagination />
-        </Router>
-      </Provider>,
-    );
-    const PaginationComponent = getByTestId('Pagination');
-    expect(PaginationComponent).toBeInTheDocument();
+    const { getByTestId } = customRender(<Pagination />, initialState, {
+      history,
+    });
+
+    const HomePageComponent = getByTestId('HomePage');
+    expect(HomePageComponent).toBeInTheDocument();
 
     expect(container.innerHTML).toMatch('Search characters by name:');
     expect(container.innerHTML).toMatch('Cards per page:');

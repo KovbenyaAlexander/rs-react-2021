@@ -16,7 +16,7 @@ const HomePage = ({ isLoading, isError }) => {
 
   return (
     <>
-      <main className={css.main}>
+      <main className={css.main} data-testid="HomePage">
         <div className={css.inputsContainer}>
           <SearchForm />
           <CardsPerPageChanger />
