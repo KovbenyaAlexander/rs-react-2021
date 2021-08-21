@@ -5,22 +5,21 @@ import css from './CardsContainer.module.css';
 import Card from './Card/Card';
 
 const CardsContainer = ({ charactersData, isError, errorMsg }) => {
+  if (isError) {
+    return (
+      <span className={css.errorMsg}> Error. Try to reload the page.</span>
+    );
+  }
+
+  if (isError && errorMsg) {
+    return <span className={css.errorMsg}> {errorMsg} </span>;
+  }
   const arrOfCards = charactersData.map((item) => (
     <Card key={item._id} data={item} />
   ));
 
   if (arrOfCards.length) {
     return <div className={css.cardsContainer}>{arrOfCards}</div>;
-  }
-
-  if (isError && errorMsg) {
-    return <span className={css.errorMsg}> {errorMsg} </span>;
-  }
-
-  if (isError) {
-    return (
-      <span className={css.errorMsg}> Error. Try to reload the page.</span>
-    );
   }
 
   return <span className={css.errorMsg}>Results not found</span>;

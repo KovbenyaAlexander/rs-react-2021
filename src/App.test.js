@@ -85,6 +85,35 @@ const initialState = {
 };
 
 describe('Home page', () => {
+  const mockData = [
+    {
+      birth: 'birth',
+      death: 'death',
+      gender: 'Female___',
+      hair: 'hair',
+      height: 'height',
+      name: 'Adanel',
+      race: 'Human',
+      realm: 'realm',
+      spouse: 'Belemir',
+      wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
+      _id: 'testID_1',
+    },
+    {
+      birth: 'birth',
+      death: 'death',
+      gender: 'Female___',
+      hair: 'hair',
+      height: 'height',
+      name: 'Adanel',
+      race: 'Human',
+      realm: 'realm',
+      spouse: 'Belemir',
+      wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
+      _id: 'testID_2',
+    },
+  ];
+
   it('Pagination generation testing', () => {
     expect(getPageNumbers(47, 10, 1)).toStrictEqual([
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -99,36 +128,7 @@ describe('Home page', () => {
     expect(container.innerHTML).toMatch(/Error. Try to reload the page./i);
   });
 
-  it('Rendering cards testing', async () => {
-    const mockData = [
-      {
-        birth: 'birth',
-        death: 'death',
-        gender: 'Female___',
-        hair: 'hair',
-        height: 'height',
-        name: 'Adanel',
-        race: 'Human',
-        realm: 'realm',
-        spouse: 'Belemir',
-        wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
-        _id: 'testID_1',
-      },
-      {
-        birth: 'birth',
-        death: 'death',
-        gender: 'Female___',
-        hair: 'hair',
-        height: 'height',
-        name: 'Adanel',
-        race: 'Human',
-        realm: 'realm',
-        spouse: 'Belemir',
-        wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
-        _id: 'testID_2',
-      },
-    ];
-
+  it('Rendering cards testing - succes', async () => {
     const { findAllByTestId } = customRender(<CardsContainer />, {
       ...initialState,
       charactersData: mockData,
@@ -136,6 +136,25 @@ describe('Home page', () => {
 
     const items = await findAllByTestId(/Card/i);
     expect(items).toHaveLength(2);
+  });
+
+  it('Rendering cards testing - error', () => {
+    const { container } = customRender(<CardsContainer />, {
+      ...initialState,
+      charactersData: mockData,
+      isError: true,
+    });
+
+    expect(container.innerHTML).toMatch(/Error. Try to reload the page./i);
+  });
+
+  it('Rendering cards testing - data not found', () => {
+    const { container } = customRender(<CardsContainer />, {
+      ...initialState,
+      charactersData: [],
+    });
+
+    expect(container.innerHTML).toMatch(/Results not found/i);
   });
 });
 
@@ -253,23 +272,6 @@ describe('Details Page', () => {
       },
       { history: history },
     );
-    const items = await findByTestId(/detailsErrorMsg/i);
-    expect(items).toBeInTheDocument();
-  });
-
-  it('Fetch data from api testing - fail', async () => {
-    const mockData = {};
-    const history = createMemoryHistory();
-    history.push('/details/testID');
-    const { findByTestId } = customRender(
-      <DetailsPage />,
-      {
-        isLoading: false,
-        detailsInfo: mockData,
-        isError: true,
-      },
-      { history: history },
-    );
     const errorMsg = await findByTestId(/detailsErrorMsg/i);
     expect(errorMsg).toBeInTheDocument();
   });
@@ -302,4 +304,5 @@ All files                                                             |    50.8 
 All files                                                             |    53.6 |     24.3 |   41.05 |   52.56 | // Error message testing
 All files                                                             |   63.75 |    40.19 |   53.68 |   62.13 | // Details page fetch
 All files                                                             |   65.08 |    49.53 |   54.74 |   63.56 | // Card rendering
+All files                                                             |   64.94 |     48.6 |   54.74 |    63.4 | // ? Card rendering - error and data not found cases
 */
