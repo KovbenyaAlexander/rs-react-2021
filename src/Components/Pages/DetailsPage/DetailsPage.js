@@ -122,7 +122,7 @@ DetailsPage.propTypes = {
     wikiUrl: PropTypes.string,
     _id: PropTypes.string,
     spouse: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

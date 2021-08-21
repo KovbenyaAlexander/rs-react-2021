@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import css from './Card.module.css';
 
 const Card = ({ data }) => (
-  <NavLink className={css.link} to={`/details/${data._id}`}>
+  <NavLink className={css.link} to={`/details/${data._id}`} data-testid="Card">
     <div className={css.cardContainer}>
       <p>
         <span className={css.fieldOfCard}>name:</span>

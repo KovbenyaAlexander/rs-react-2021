@@ -25,6 +25,7 @@ import AboutPage from './Components/Pages/AboutPage/AboutPage';
 import HomePage from './Components/Pages/HomePage/HomePage';
 import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
 import axios from 'axios';
+import CardsContainer from './Components/Pages/HomePage/Components/CardsContainer/CardsContainer';
 import {
   setDetailsId,
   setDetailsInfo,
@@ -90,19 +91,51 @@ describe('Home page', () => {
     ]);
   });
 
-  it('Home page rendering', () => {
-    const { getByText } = render(<AboutPage />);
-    const HomePageContent = getByText(/AboutPageText/i);
-    expect(HomePageContent).toBeInTheDocument();
-  });
-
   it('Error message testing', () => {
     const { container } = customRender(<HomePage />, {
       ...initialState,
       isError: true,
     });
-
     expect(container.innerHTML).toMatch(/Error. Try to reload the page./i);
+  });
+
+  it('Rendering cards testing', async () => {
+    const mockData = [
+      {
+        birth: 'birth',
+        death: 'death',
+        gender: 'Female___',
+        hair: 'hair',
+        height: 'height',
+        name: 'Adanel',
+        race: 'Human',
+        realm: 'realm',
+        spouse: 'Belemir',
+        wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
+        _id: 'testID_1',
+      },
+      {
+        birth: 'birth',
+        death: 'death',
+        gender: 'Female___',
+        hair: 'hair',
+        height: 'height',
+        name: 'Adanel',
+        race: 'Human',
+        realm: 'realm',
+        spouse: 'Belemir',
+        wikiUrl: 'http://lotr.wikia.com//wiki/Adanel',
+        _id: 'testID_2',
+      },
+    ];
+
+    const { findAllByTestId } = customRender(<CardsContainer />, {
+      ...initialState,
+      charactersData: mockData,
+    });
+
+    const items = await findAllByTestId(/Card/i);
+    expect(items).toHaveLength(2);
   });
 });
 
@@ -208,7 +241,7 @@ describe('Details Page', () => {
   });
 
   it('Fetch data from api testing - fail', async () => {
-    const mockData = null;
+    const mockData = {};
     const history = createMemoryHistory();
     history.push('/details/testID');
     const { findByTestId } = customRender(
@@ -225,7 +258,7 @@ describe('Details Page', () => {
   });
 
   it('Fetch data from api testing - fail', async () => {
-    const mockData = null;
+    const mockData = {};
     const history = createMemoryHistory();
     history.push('/details/testID');
     const { findByTestId } = customRender(
@@ -268,4 +301,5 @@ All files                                                             |    32.8 
 All files                                                             |    50.8 |    17.76 |   38.95 |      50 | // HomePage testing
 All files                                                             |    53.6 |     24.3 |   41.05 |   52.56 | // Error message testing
 All files                                                             |   63.75 |    40.19 |   53.68 |   62.13 | // Details page fetch
+All files                                                             |   65.08 |    49.53 |   54.74 |   63.56 | // Card rendering
 */
