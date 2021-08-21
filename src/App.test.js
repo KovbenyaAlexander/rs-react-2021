@@ -17,6 +17,7 @@ import App from './App';
 import reducer from './redux/reducer';
 import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
 import AboutPage from './Components/Pages/AboutPage/AboutPage';
+import HomePage from './Components/Pages/HomePage/HomePage';
 import {
   setDetailsId,
   setDetailsInfo,
@@ -33,18 +34,35 @@ global.fetch = require('node-fetch'); // shouldn't it be used?
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
-const renderWithRedux = (
+// const renderWithRedux = (
+//   component,
+//   { initialState, store = createStore(reducer, initialState) } = {},
+// ) => {
+//   return {
+//     ...render(<Provider store={store}>{component}</Provider>),
+//     store,
+//   };
+// };
+
+// const renderWithRouter = (
+//   component,
+//   {
+//     route = '/',
+//     history = createMemoryHistory({ initialEntries: [route] }),
+//   } = {},
+// ) => {
+//   const Wrapper = ({ children }) => (
+//     <Router history={history}>{children}</Router>
+//   );
+//   return {
+//     ...render(component, { wrapper: Wrapper }),
+//     history,
+//   };
+// };
+
+const customRender = (
   component,
   { initialState, store = createStore(reducer, initialState) } = {},
-) => {
-  return {
-    ...render(<Provider store={store}>{component}</Provider>),
-    store,
-  };
-};
-
-const renderWithRouter = (
-  component,
   {
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
@@ -54,29 +72,52 @@ const renderWithRouter = (
     <Router history={history}>{children}</Router>
   );
   return {
-    ...render(component, { wrapper: Wrapper }),
+    ...render(<Provider store={store}>{component}</Provider>, {
+      wrapper: Wrapper,
+    }),
+    store,
     history,
   };
 };
 
+const initialState = {
+  searchText: '',
+  currentPage: 1,
+  cardsPerPage: 20,
+  sort: 'name:asc',
+  charactersData: [],
+  totalPages: 1,
+  detailsID: '',
+  detailsInfo: {},
+  isLoading: false,
+  isError: false,
+  errorMsg: '',
+};
+
 describe('Home page', () => {
-  it('pagination generation testing', () => {
+  it('Pagination generation testing', () => {
     expect(getPageNumbers(47, 10, 1)).toStrictEqual([
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     ]);
   });
-});
 
-describe('Home page', () => {
   it('Home page rendering', () => {
     const { getByText } = render(<AboutPage />);
     const HomePageContent = getByText(/AboutPageText/i);
     expect(HomePageContent).toBeInTheDocument();
   });
+
+  it('Error message testing', () => {
+    const { container } = customRender(<HomePage />, {
+      initialState: { ...initialState, isError: true },
+    });
+
+    expect(container.innerHTML).toMatch(/Error. Try to reload the page./i);
+  });
 });
 
 describe('React Router', () => {
-  it('should navigate to error page if route is wrong', () => {
+  it('Should navigate to error page if route is wrong', () => {
     const history = createMemoryHistory();
     history.push('/wrong-route');
     const { container } = render(
@@ -89,7 +130,7 @@ describe('React Router', () => {
     expect(container.innerHTML).toMatch('Error 404. Page not found.');
   });
 
-  it(`should navigate to home page if route is '/'`, () => {
+  it(`Should navigate to home page if route is '/'`, () => {
     const history = createMemoryHistory();
     history.push('/');
     const { container } = render(
@@ -116,7 +157,7 @@ describe('React Router', () => {
 });
 
 describe('Redux actions', () => {
-  it('should return correct action', () => {
+  it('Should return correct action', () => {
     expect(setDetailsId('payload')).toStrictEqual({
       payload: 'payload',
       type: 'SET_DETAILS_ID',
@@ -163,7 +204,7 @@ All files                                                             |    29.2 
 All files                                                             |    29.6 |     4.67 |   12.63 |   30.77 | // AboutPage rendering
 All files                                                             |    32.8 |     4.67 |   21.05 |   34.19 | // Actions
 All files                                                             |    50.8 |    17.76 |   38.95 |      50 | // HomePage testing
-
+All files                                                             |    53.6 |     24.3 |   41.05 |   52.56 | // Error message testing
 /*
 describe('React Router', () => {
   it('should navigate to error page if route is wrong', () => {

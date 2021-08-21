@@ -18,7 +18,9 @@ const CardsContainer = ({ charactersData, isError, errorMsg }) => {
   }
 
   if (isError) {
-    return <span className={css.errorMsg}> Unknown error </span>;
+    return (
+      <span className={css.errorMsg}> Error. Try to reload the page.</span>
+    );
   }
 
   return <span className={css.errorMsg}>Results not found</span>;
