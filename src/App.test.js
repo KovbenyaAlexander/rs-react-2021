@@ -223,6 +223,40 @@ describe('Details Page', () => {
     const items = await findByTestId(/detailsErrorMsg/i);
     expect(items).toBeInTheDocument();
   });
+
+  it('Fetch data from api testing - fail', async () => {
+    const mockData = null;
+    const history = createMemoryHistory();
+    history.push('/details/testID');
+    const { findByTestId } = customRender(
+      <DetailsPage />,
+      {
+        isLoading: false,
+        detailsInfo: mockData,
+        isError: true,
+      },
+      { history: history },
+    );
+    const errorMsg = await findByTestId(/detailsErrorMsg/i);
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it('Fetch data from api testing - loader', async () => {
+    const mockData = null;
+    const history = createMemoryHistory();
+    history.push('/details/testID');
+    const { findByTestId } = customRender(
+      <DetailsPage />,
+      {
+        isLoading: true,
+        detailsInfo: mockData,
+        isError: false,
+      },
+      { history: history },
+    );
+    const loader = await findByTestId(/loader/i);
+    expect(loader).toBeInTheDocument();
+  });
 });
 
 /*
