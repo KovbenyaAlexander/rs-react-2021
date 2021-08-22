@@ -40,6 +40,7 @@ import {
 } from './redux/actions/actions';
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
 import { exact } from 'prop-types';
+import Sort from './Components/Pages/HomePage/Components/Sort/Sort';
 global.fetch = require('node-fetch'); // shouldn't it be used?
 
 jest.mock('axios');
@@ -121,6 +122,25 @@ describe('Home page', () => {
     ]);
   });
 
+  it('Click on pagination testing', () => {
+    const { getByText, getByTestId } = customRender(<Pagination />, {
+      ...initialState,
+      totalPages: 50,
+    });
+
+    const ENDButton = getByText('END');
+    fireEvent.click(ENDButton);
+    for (let i = 41; i <= 50; i++) {
+      expect(getByText(i)).toBeInTheDocument();
+    }
+
+    const STARTButton = getByText('START');
+    fireEvent.click(STARTButton);
+    for (let i = 1; i <= 10; i++) {
+      expect(getByText(i)).toBeInTheDocument();
+    }
+  });
+
   it('Error message testing', () => {
     const { container } = customRender(<HomePage />, {
       ...initialState,
@@ -182,9 +202,7 @@ describe('React Router', () => {
   it(`Should navigate to home page if route is '/'`, () => {
     const history = createMemoryHistory();
     history.push('/');
-    const { container } = customRender(<App />, initialState, { history });
-
-    const { getByTestId } = customRender(<Pagination />, initialState, {
+    const { container, getByTestId } = customRender(<App />, initialState, {
       history,
     });
 
@@ -314,4 +332,5 @@ All files                                                             |   63.75 
 All files                                                             |   65.08 |    49.53 |   54.74 |   63.56 | // Card rendering
 All files                                                             |   64.94 |     48.6 |   54.74 |    63.4 | // ? Card rendering - error and data not found cases
 All files                                                             |   66.14 |     48.6 |   56.84 |   64.68 | // SearchForm onchange
+All files                                                             |   71.31 |    57.01 |   62.11 |   70.21 | // Pagination click testing
 */
