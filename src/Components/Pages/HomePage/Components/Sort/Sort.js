@@ -73,6 +73,7 @@ const Sort = ({ setSortType, getAllCharacters }) => {
             required
             checked={typeOfSort.name}
             onChange={(e) => onChangeHandler(e)}
+            data-testid="sortByName"
           />
           <span className={css.sortDescription}>name</span>
         </label>
@@ -97,6 +98,7 @@ const Sort = ({ setSortType, getAllCharacters }) => {
             required
             checked={typeOfSort.gender}
             onChange={(e) => onChangeHandler(e)}
+            data-testid="sortByRace"
           />
           <span className={css.sortDescription}>gender</span>
         </label>
@@ -109,6 +111,7 @@ const Sort = ({ setSortType, getAllCharacters }) => {
             required
             checked={typeOfSort.birth}
             onChange={(e) => onChangeHandler(e)}
+            data-testid="sortByGender"
           />
           <span className={css.sortDescription}>birth</span>
         </label>
@@ -121,6 +124,7 @@ const Sort = ({ setSortType, getAllCharacters }) => {
             required
             checked={typeOfSort.death}
             onChange={(e) => onChangeHandler(e)}
+            data-testid="sortByBirth"
           />
           <span className={css.sortDescription}>death</span>
         </label>

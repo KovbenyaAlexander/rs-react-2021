@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { expect } from '@jest/globals';
@@ -20,6 +20,7 @@ import SearchForm from './Components/Pages/HomePage/Components/SearchForm/Search
 import HomePage from './Components/Pages/HomePage/HomePage';
 import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
 import CardsContainer from './Components/Pages/HomePage/Components/CardsContainer/CardsContainer';
+import Sort from './Components/Pages/HomePage/Components/Sort/Sort';
 import {
   setDetailsId,
   setDetailsInfo,
@@ -174,6 +175,21 @@ describe('Home page', () => {
     fireEvent.change(searchInput, { target: { value: 'JEST' } });
     expect(searchInput.value).toBe('JEST');
   });
+
+  it('Sort onchange inputs testing_______________', () => {
+    const { getByTestId } = customRender(<Sort />);
+    const sortByRace = getByTestId('sortByRace');
+    const sortByName = getByTestId('sortByName');
+    const sortByGender = getByTestId('sortByGender');
+    const sortByBirth = getByTestId('sortByBirth');
+
+    fireEvent.click(sortByRace);
+
+    expect(sortByRace.checked).toEqual(true);
+    expect(sortByName.checked).toEqual(false);
+    expect(sortByGender.checked).toEqual(false);
+    expect(sortByBirth.checked).toEqual(false);
+  });
 });
 
 describe('React Router', () => {
@@ -200,7 +216,7 @@ describe('React Router', () => {
   });
 });
 
-describe('Redux actions', () => {
+describe('Redux', () => {
   it('Should return correct action', () => {
     expect(setDetailsId('payload')).toStrictEqual({
       payload: 'payload',
@@ -319,4 +335,5 @@ All files                                                             |   65.08 
 All files                                                             |   64.94 |     48.6 |   54.74 |    63.4 | // ? Card rendering - error and data not found cases
 All files                                                             |   66.14 |     48.6 |   56.84 |   64.68 | // SearchForm onchange
 All files                                                             |   71.31 |    57.01 |   62.11 |   70.21 | // Pagination click testing
+All files                                                             |   73.31 |    59.26 |   65.26 |   71.91 | // Sort onchange testing
 */
