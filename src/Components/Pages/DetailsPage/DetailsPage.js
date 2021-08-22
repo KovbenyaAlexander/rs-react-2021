@@ -5,7 +5,12 @@ import getDetailsInfo from '../../../redux/actions/thunk/getDetailsInfo';
 import Loader from '../../Loader/Loader';
 import css from './DetailsPage.module.css';
 
-const DetailsPage = ({ getDetailsInfo, detailsInfo, isLoading, isError }) => {
+const DetailsPage = ({
+  getDetailsInfo,
+  detailsInfo = {},
+  isLoading,
+  isError,
+}) => {
   useEffect(() => {
     getDetailsInfo();
   }, []);
@@ -122,7 +127,7 @@ DetailsPage.propTypes = {
     wikiUrl: PropTypes.string,
     _id: PropTypes.string,
     spouse: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

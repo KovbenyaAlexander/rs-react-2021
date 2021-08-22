@@ -64,18 +64,4 @@ const App = () => {
   );
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   getAllCharacters: () => {
-//     dispatch(getAllCharacters());
-//   },
-//   setDetailsId: (id) => {
-//     dispatch(setDetailsId(id));
-//   },
-// });
-
-// App.propTypes = {
-//   getAllCharacters: PropTypes.func.isRequired,
-//   setDetailsId: PropTypes.func.isRequired,
-// };
-
 export default App;

@@ -1,31 +1,24 @@
 /**
  * @jest-environment jsdom
  */
+/* eslint-disable react/prop-types */
 
 import React from 'react';
-import {
-  findAllByText,
-  fireEvent,
-  getByRole,
-  render,
-  screen,
-} from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { expect } from '@jest/globals';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
-import { Link, Route, Router, Switch, useParams } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import getPageNumbers from './Components/Pages/HomePage/Components/Pagination/PaginationService';
 import App from './App';
 import reducer from './redux/reducer';
 import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
-import AboutPage from './Components/Pages/AboutPage/AboutPage';
 import HomePage from './Components/Pages/HomePage/HomePage';
 import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
-import axios from 'axios';
 import CardsContainer from './Components/Pages/HomePage/Components/CardsContainer/CardsContainer';
 import {
   setDetailsId,
@@ -39,11 +32,8 @@ import {
   setNumberOfPage,
 } from './redux/actions/actions';
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
-import { exact } from 'prop-types';
-import Sort from './Components/Pages/HomePage/Components/Sort/Sort';
-global.fetch = require('node-fetch'); // shouldn't it be used?
 
-jest.mock('axios');
+global.fetch = require('node-fetch');
 
 const customRender = (
   component,
@@ -123,20 +113,20 @@ describe('Home page', () => {
   });
 
   it('Click on pagination testing', () => {
-    const { getByText, getByTestId } = customRender(<Pagination />, {
+    const { getByText } = customRender(<Pagination />, {
       ...initialState,
       totalPages: 50,
     });
 
     const ENDButton = getByText('END');
     fireEvent.click(ENDButton);
-    for (let i = 41; i <= 50; i++) {
+    for (let i = 41; i <= 50; i += 1) {
       expect(getByText(i)).toBeInTheDocument();
     }
 
     const STARTButton = getByText('START');
     fireEvent.click(STARTButton);
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 10; i += 1) {
       expect(getByText(i)).toBeInTheDocument();
     }
   });
@@ -190,11 +180,7 @@ describe('React Router', () => {
   it('Should navigate to error page if route is wrong', () => {
     const history = createMemoryHistory();
     history.push('/wrong-route');
-    const { container } = customRender(
-      <App />,
-      { initialState: initialState },
-      { history: history },
-    );
+    const { container } = customRender(<App />, { initialState }, { history });
 
     expect(container.innerHTML).toMatch('Error 404. Page not found.');
   });
@@ -279,7 +265,7 @@ describe('Details Page', () => {
         detailsInfo: mockData,
         isError: false,
       },
-      { history: history },
+      { history },
     );
     const items = await findAllByTestId(/detailsItem/i);
     expect(items).toHaveLength(11);
@@ -296,14 +282,14 @@ describe('Details Page', () => {
         detailsInfo: mockData,
         isError: true,
       },
-      { history: history },
+      { history },
     );
     const errorMsg = await findByTestId(/detailsErrorMsg/i);
     expect(errorMsg).toBeInTheDocument();
   });
 
   it('Fetch data from api testing - loader', async () => {
-    const mockData = null;
+    const mockData = {};
     const history = createMemoryHistory();
     history.push('/details/testID');
     const { findByTestId } = customRender(
@@ -313,7 +299,7 @@ describe('Details Page', () => {
         detailsInfo: mockData,
         isError: false,
       },
-      { history: history },
+      { history },
     );
     const loader = await findByTestId(/loader/i);
     expect(loader).toBeInTheDocument();
