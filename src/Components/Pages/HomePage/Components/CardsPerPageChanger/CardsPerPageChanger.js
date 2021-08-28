@@ -5,12 +5,15 @@ import css from './CardsPerPage.module.css';
 import { setCardPerPageValue } from '../../../../../redux/actions/actions';
 import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacters';
 
-const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
-  const [inputValue, setInputvalue] = useState('20');
+const CardsPerPageChanger = ({
+  setCardPerPageValue,
+  getAllCharacters,
+  cardsPerPage,
+}) => {
   const [error, setError] = useState(true);
 
   useEffect(() => {
-    const value = Number(inputValue);
+    const value = Number(cardsPerPage);
     setError({});
     if (
       Number.isNaN(value) ||
@@ -22,17 +25,17 @@ const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
     } else {
       setError(false);
     }
-  }, [inputValue]);
+  }, [cardsPerPage]);
 
   const onChangeHandler = (e) => {
     const newInputValue = e.target.value;
-    setInputvalue(newInputValue);
+    setCardPerPageValue(newInputValue);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (!error) {
-      setCardPerPageValue(Number(inputValue));
+      setCardPerPageValue(Number(cardsPerPage));
       getAllCharacters();
     }
   };
@@ -43,7 +46,7 @@ const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
       <input
         className={css.input}
         type="text"
-        value={inputValue}
+        value={cardsPerPage}
         onChange={(e) => onChangeHandler(e)}
       />
       <button className={css.submit} type="submit">
@@ -58,6 +61,10 @@ const CardsPerPageChanger = ({ setCardPerPageValue, getAllCharacters }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  cardsPerPage: state.cardsPerPage,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCardPerPageValue: (inputValue) => {
     dispatch(setCardPerPageValue(inputValue));
@@ -70,6 +77,10 @@ const mapDispatchToProps = (dispatch) => ({
 CardsPerPageChanger.propTypes = {
   setCardPerPageValue: PropTypes.func.isRequired,
   getAllCharacters: PropTypes.func.isRequired,
+  cardsPerPage: PropTypes.string.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(CardsPerPageChanger);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CardsPerPageChanger);
