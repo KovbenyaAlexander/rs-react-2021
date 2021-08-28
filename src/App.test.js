@@ -4,23 +4,19 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { Router } from 'react-router-dom';
+
+import { fireEvent, render } from '@testing-library/react';
 import { expect } from '@jest/globals';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+
 import getPageNumbers from './Components/Pages/HomePage/Components/Pagination/PaginationService';
-import App from './App';
 import reducer from './redux/reducer';
-import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
-import HomePage from './Components/Pages/HomePage/HomePage';
-import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
-import CardsContainer from './Components/Pages/HomePage/Components/CardsContainer/CardsContainer';
-import Sort from './Components/Pages/HomePage/Components/Sort/Sort';
 import {
   setDetailsId,
   setDetailsInfo,
@@ -32,7 +28,14 @@ import {
   setSortType,
   setNumberOfPage,
 } from './redux/actions/actions';
+
+import App from './App';
 import Pagination from './Components/Pages/HomePage/Components/Pagination/Pagination';
+import SearchForm from './Components/Pages/HomePage/Components/SearchForm/SearchForm';
+import HomePage from './Components/Pages/HomePage/HomePage';
+import DetailsPage from './Components/Pages/DetailsPage/DetailsPage';
+import CardsContainer from './Components/Pages/HomePage/Components/CardsContainer/CardsContainer';
+import Sort from './Components/Pages/HomePage/Components/Sort/Sort';
 
 global.fetch = require('node-fetch');
 
@@ -176,7 +179,7 @@ describe('Home page', () => {
     expect(searchInput.value).toBe('JEST');
   });
 
-  it('Sort onchange inputs testing_______________', () => {
+  it('Sort onchange inputs testing', () => {
     const { getByTestId } = customRender(<Sort />);
     const sortByRace = getByTestId('sortByRace');
     const sortByName = getByTestId('sortByName');
@@ -255,6 +258,27 @@ describe('Redux', () => {
       type: 'SET_NUMBER_OF_PAGE',
     });
   });
+  it('Reducer testing', () => {
+    const testAction1 = {
+      type: 'SET_SEARCH_TEXT',
+      payload: 'JEST TESTING',
+    };
+
+    const testAction2 = {
+      type: 'SET_DETAILS_ID',
+      payload: '1024',
+    };
+
+    expect(reducer(initialState, testAction1)).toStrictEqual({
+      ...initialState,
+      searchText: 'JEST TESTING',
+    });
+
+    expect(reducer(initialState, testAction2)).toStrictEqual({
+      ...initialState,
+      detailsID: '1024',
+    });
+  });
 });
 
 describe('Details Page', () => {
@@ -321,19 +345,3 @@ describe('Details Page', () => {
     expect(loader).toBeInTheDocument();
   });
 });
-
-/*
-All files                                                             |    18.8 |        0 |       0 |   20.09 | // init
-All files                                                             |   21.18 |     1.87 |    3.13 |   22.27 | // pagination generation
-All files                                                             |    29.2 |     4.67 |   11.58 |   30.34 | // 404 testing
-All files                                                             |    29.6 |     4.67 |   12.63 |   30.77 | // AboutPage rendering
-All files                                                             |    32.8 |     4.67 |   21.05 |   34.19 | // Actions
-All files                                                             |    50.8 |    17.76 |   38.95 |      50 | // HomePage testing
-All files                                                             |    53.6 |     24.3 |   41.05 |   52.56 | // Error message testing
-All files                                                             |   63.75 |    40.19 |   53.68 |   62.13 | // Details page fetch
-All files                                                             |   65.08 |    49.53 |   54.74 |   63.56 | // Card rendering
-All files                                                             |   64.94 |     48.6 |   54.74 |    63.4 | // ? Card rendering - error and data not found cases
-All files                                                             |   66.14 |     48.6 |   56.84 |   64.68 | // SearchForm onchange
-All files                                                             |   71.31 |    57.01 |   62.11 |   70.21 | // Pagination click testing
-All files                                                             |   73.31 |    59.26 |   65.26 |   71.91 | // Sort onchange testing
-*/
