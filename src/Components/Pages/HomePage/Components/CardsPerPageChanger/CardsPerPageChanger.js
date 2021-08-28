@@ -8,7 +8,7 @@ import getAllCharacters from '../../../../../redux/actions/thunk/getAllCharacter
 const CardsPerPageChanger = ({
   setCardPerPageValue,
   getAllCharacters,
-  cardsPerPage,
+  cardsPerPage = 20,
 }) => {
   const [error, setError] = useState(true);
 
@@ -77,7 +77,11 @@ const mapDispatchToProps = (dispatch) => ({
 CardsPerPageChanger.propTypes = {
   setCardPerPageValue: PropTypes.func.isRequired,
   getAllCharacters: PropTypes.func.isRequired,
-  cardsPerPage: PropTypes.string.isRequired,
+  cardsPerPage: PropTypes.number,
+};
+
+CardsPerPageChanger.defaultProps = {
+  cardsPerPage: '',
 };
 
 export default connect(
