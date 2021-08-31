@@ -1,0 +1,10 @@
+.detailsContainer {
+  width: 500px;
+  margin: 0 auto;
+  font-size: 22px;
+  padding-top: 5px;
+}
+
+.fieldOfCard {
+  font-weight: bold;
+}
