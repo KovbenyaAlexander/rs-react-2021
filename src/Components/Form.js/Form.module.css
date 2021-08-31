@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  transition: 0.3s;
+}
+
+.form:hover {
+  box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+input:invalid,
+select:invalid {
+  border-color: red;
+}
+
+input:valid,
+select:valid {
+  border-color: green;
+}
+
+.agreement {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.validationError {
+  font-size: 13px;
+  color: red;
+}
+
+.familyStatusWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+}
