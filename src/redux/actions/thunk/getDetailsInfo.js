@@ -10,7 +10,7 @@ const getDetailsInfo = () => (dispatch, getState) => {
     method: 'GET',
     headers: {
       // Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
-      Authorization: 'Bearer db3XQf7N45ifx9Pj1BAA',
+      Authorization: 'Bearer hZv5BdlxLlXDJYQKfCQV',
     },
   })
     .then((response) => {
