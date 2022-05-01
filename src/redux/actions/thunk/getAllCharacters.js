@@ -1,0 +1,42 @@
+import {
+  setCharactersData,
+  setLoadingStatus,
+  setErrorStatus,
+} from '../actions';
+
+const getAllCharacters = () => (dispatch, getState) => {
+  const state = getState();
+  const { searchText } = state;
+  const { currentPage } = state;
+  const { cardsPerPage } = state;
+  dispatch(setLoadingStatus(true));
+  const URL = `https://the-one-api.dev/v2/character?page=${currentPage}&limit=${cardsPerPage}&sort=${state.sort}&name=/${searchText}/i`;
+  fetch(URL, {
+    method: 'GET',
+    headers: {
+      // Authorization: 'Bearer z6LNSGjwUCwFg_6rz5Zy',
+      Authorization: 'Bearer hZv5BdlxLlXDJYQKfCQV',
+    },
+  })
+    .then((response) => {
+      if (response.status === 429) {
+        dispatch(
+          setErrorStatus({
+            isError: true,
+            errorMsg: 'Too many requests. Try later.',
+          }),
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      dispatch(setLoadingStatus(false));
+      dispatch(setCharactersData(data));
+    })
+    .catch(() => {
+      setErrorStatus(true);
+      dispatch(setLoadingStatus(false));
+    });
+};
+
+export default getAllCharacters;

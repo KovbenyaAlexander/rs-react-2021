@@ -1,0 +1,9 @@
+.errorContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.errorMsg {
+  font-size: 50px;
+}
